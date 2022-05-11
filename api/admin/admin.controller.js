@@ -20,7 +20,14 @@ const getAdmin = asyncHandler(async (req, res) => {
 // @routes          GET /api/admin/:id
 // @access          Public
 const getAdminById = asyncHandler(async (req, res) => {
-    const adminById = await Admin.findById(req.body.id)
+    const adminById = await Admin.findById(req.params.id)
+
+    if (!adminById) {
+        return res.status(404).json({
+            success: 0,
+            message: 'Admin not found'
+        })
+    }
 
     res.status(200).json({
         success: 1,
@@ -76,7 +83,7 @@ const updateAdmin = asyncHandler(async (req, res) => {
         role: req.body.role
     }
 
-    const checkAdminIfExist = await Admin.findById(req.body.id)
+    const checkAdminIfExist = await Admin.findById(req.params.id)
 
     if (!req.body.name || !req.body.email || !req.body.password || !req.body.role) {
         return res.status(400).json({
@@ -93,7 +100,7 @@ const updateAdmin = asyncHandler(async (req, res) => {
     const salt = await genSalt(10)
     data_admin.password = hashSync(data_admin.password, salt)
 
-    const admin = await Admin.findByIdAndUpdate(req.body.id, data_admin, { new: true })
+    const admin = await Admin.findByIdAndUpdate(req.params.id, data_admin, { new: true })
 
     res.status(200).json({
         success: 1,
@@ -105,7 +112,7 @@ const updateAdmin = asyncHandler(async (req, res) => {
 // @routes          DELETE /api/admin/:id
 // @access          Public
 const deleteAdmin = asyncHandler(async (req, res) => {
-    const delAdmin = await Admin.findById(req.body.id)
+    const delAdmin = await Admin.findById(req.params.id)
 
     if (!delAdmin) {
         return res.status(404).json({
@@ -118,7 +125,7 @@ const deleteAdmin = asyncHandler(async (req, res) => {
 
     res.status(200).json({
         success: 1,
-        id: req.body.id,
+        id: req.params.id,
         message: "data has been deleted"
     })
 })
@@ -142,6 +149,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
             success: 0,
             message: 'Invalid credentials'
         })
+        throw new Error('Invalid credentials')
     }
 })
 
