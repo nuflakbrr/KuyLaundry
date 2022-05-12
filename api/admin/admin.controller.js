@@ -12,6 +12,7 @@ const getAdmin = asyncHandler(async (req, res) => {
 
     res.status(200).json({
         success: 1,
+        message: 'Member found',
         data: admins
     })
 })
@@ -31,6 +32,7 @@ const getAdminById = asyncHandler(async (req, res) => {
 
     res.status(200).json({
         success: 1,
+        message: 'Member found',
         data: adminById
     })
 })
@@ -46,7 +48,7 @@ const postAdmin = asyncHandler(async (req, res) => {
         role: req.body.role
     }
 
-    if (!req.body.name || !req.body.email || !req.body.password || !req.body.role) {
+    if (!req.body.name || !req.body.email || !req.body.password || !req.body.role || !data_admin) {
         return res.status(400).json({
             success: 0,
             message: 'Please provide all required fields'
@@ -68,6 +70,7 @@ const postAdmin = asyncHandler(async (req, res) => {
 
     res.status(201).json({
         success: 1,
+        message: 'Admin created successfully',
         data: admin
     })
 })
@@ -100,10 +103,11 @@ const updateAdmin = asyncHandler(async (req, res) => {
     const salt = await genSalt(10)
     data_admin.password = hashSync(data_admin.password, salt)
 
-    const admin = await Admin.findByIdAndUpdate(req.params.id, data_admin, { new: true })
+    const admin = await Admin.findByIdAndUpdate(req.params.id, data_admin, { new: true, runValidators: true })
 
     res.status(200).json({
         success: 1,
+        message: 'Admin updated successfully',
         data: admin
     })
 })
@@ -125,8 +129,8 @@ const deleteAdmin = asyncHandler(async (req, res) => {
 
     res.status(200).json({
         success: 1,
-        id: req.params.id,
-        message: "data has been deleted"
+        _id: req.params.id,
+        message: "Admin has been deleted"
     })
 })
 
@@ -141,6 +145,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
     if (admin && (await compareSync(password, admin.password))) {
         res.json({
             _id: admin._id,
+            message: 'Login Successful',
             user: admin,
             token: generateToken(admin._id)
         })
