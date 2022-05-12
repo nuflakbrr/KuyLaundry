@@ -44,7 +44,7 @@ app.get("/api", (req, res) => {
                 addData: "/api/package/",
                 updateData: "/api/package/",
                 deleteData: "/api/package/:id",
-                status: "🚧 on development"
+                status: 200
             }],
             transactions: [{
                 getAllData: "/api/transaction/",
@@ -64,6 +64,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/api/admin', require('./api/admin/admin.router'))
 app.use('/api/member', require('./api/member/member.router'))
 app.use('/api/outlet', require('./api/outlet/outlet.router'))
+app.use('/api/package', require('./api/package/package.router'))
 
 app.use(errorHandler)
 
