@@ -36,7 +36,7 @@ app.get("/api", (req, res) => {
                 addData: "/api/outlet/",
                 updateData: "/api/outlet/",
                 deleteData: "/api/outlet/:id",
-                status: "🚧 on development"
+                status: 200
             }],
             package: [{
                 getAllData: "/api/package/",
@@ -63,6 +63,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/api/admin', require('./api/admin/admin.router'))
 app.use('/api/member', require('./api/member/member.router'))
+app.use('/api/outlet', require('./api/outlet/outlet.router'))
 
 app.use(errorHandler)
 
