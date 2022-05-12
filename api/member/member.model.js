@@ -15,7 +15,7 @@ const memberSchema = new mongoose.Schema({
         required: [true, 'Please add a gender value']
     },
     phone: {
-        type: Number,
+        type: String,
         unique: true,
         required: [true, 'Please add a phone number value']
     }

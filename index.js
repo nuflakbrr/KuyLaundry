@@ -13,6 +13,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use('/api/admin', require('./api/admin/admin.router'))
+app.use('/api/member', require('./api/member/member.router'))
 
 app.use(errorHandler)
 
