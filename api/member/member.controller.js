@@ -4,7 +4,7 @@ const Member = require('./member.model')
 
 // @description     GET All Member Data
 // @routes          GET /api/member/
-// @access          Public
+// @access          Private
 const getMember = asyncHandler(async (req, res) => {
     const members = await Member.find()
 
@@ -17,7 +17,7 @@ const getMember = asyncHandler(async (req, res) => {
 
 // @description     GET Member Data By Id
 // @routes          GET /api/member/:id
-// @access          Public
+// @access          Private
 const getMemberById = asyncHandler(async (req, res) => {
     const memberById = await Member.findById(req.params.id)
 
@@ -37,7 +37,7 @@ const getMemberById = asyncHandler(async (req, res) => {
 
 // @description     POST Member Data
 // @routes          GET /api/member/
-// @access          Public
+// @access          Private
 const postMember = asyncHandler(async (req, res) => {
     data_member = {
         name: req.body.name,
@@ -72,7 +72,7 @@ const postMember = asyncHandler(async (req, res) => {
 
 // @description     PUT Member Data
 // @routes          PUT /api/admin/:id
-// @access          Public
+// @access          Private
 const putMember = asyncHandler(async (req, res) => {
     data_member = {
         address: req.body.address,
@@ -104,7 +104,7 @@ const putMember = asyncHandler(async (req, res) => {
 
 // @description     DELETE Member Data
 // @routes          DELETE /api/member/
-// @access          Public
+// @access          Private
 const deleteMember = asyncHandler(async (req, res) => {
     const delMember = await Member.findById(req.params.id)
 
