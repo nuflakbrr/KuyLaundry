@@ -15,6 +15,6 @@ const detailTransactionSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Quantity is required']
     },
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model('DetailTransaction', detailTransactionSchema)

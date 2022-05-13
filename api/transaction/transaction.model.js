@@ -35,6 +35,6 @@ const transactionSchema = new mongoose.Schema({
         ref: 'Admin',
         required: [true, 'Admin ID is required']
     },
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model('Transaction', transactionSchema)
