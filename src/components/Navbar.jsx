@@ -20,6 +20,7 @@ export default function Navbar() {
 
     const links = [
         { path: '/', name: 'Beranda' },
+        { path: '/developers', name: 'Developer' },
         { path: '/login', name: 'Login' },
     ]
 
