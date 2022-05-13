@@ -16,7 +16,7 @@ const adminSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['admin', 'cashier'],
+        enum: ['admin', 'cashier', 'owner'],
         default: 'cashier',
         required: [true, 'Please add a role value']
     }
