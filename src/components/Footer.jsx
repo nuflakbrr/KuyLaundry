@@ -4,6 +4,22 @@ import { NavLink } from 'react-router-dom';
 export default function Footer() {
     const year = new Date().getFullYear()
 
+    const navLink = [
+        { path: '/', name: 'Beranda' },
+        { path: '/developers', name: 'Developer' },
+        { path: '/login', name: 'Login' },
+    ]
+
+    const socialLink = [
+        { href: 'https://instagram.com/kbrnugroho', name: 'Instagram' },
+        { href: 'https://github.com/nuflakbrr', name: 'GitHub' },
+    ]
+
+    const contactLink = [
+        { href: 'mailto:naufalakbar378@gmail.com', name: 'Email' },
+        { href: 'https://www.linkedin.com/public-profile/in/nuflakbrr', name: 'LinkedIn' }
+    ]
+
     return (
         <footer className='pt-24 pb-12 px-5 max-w-7xl mx-auto'>
             <div className='container'>
@@ -22,15 +38,11 @@ export default function Footer() {
                             Navigasi
                         </h2>
                         <ul>
-                            <li>
-                                <NavLink to='/' className='inline-block text-base text-slate-300 hover:text-zinc-50'>Beranda</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to='/developers' className='inline-block text-base text-slate-300 hover:text-zinc-50'>Developer</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to='/login' className='inline-block text-base text-slate-300 hover:text-zinc-50'>Login</NavLink>
-                            </li>
+                            {navLink.map((link, index) => (
+                                <li key={index}>
+                                    <NavLink className='inline-block text-base text-slate-300 hover:text-zinc-50' to={link.path}>{link.name}</NavLink>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                     {/* Navigation End */}
@@ -41,12 +53,11 @@ export default function Footer() {
                             Sosial Media
                         </h2>
                         <ul>
-                            <li>
-                                <a href='https://instagram.com/kbrnugroho' target='_blank' className='inline-block text-base text-slate-300 hover:text-zinc-50'>Instagram</a>
-                            </li>
-                            <li>
-                                <a href='https://github.com/nuflakbrr' target='_blank' className='inline-block text-base text-slate-300 hover:text-zinc-50'>GitHub</a>
-                            </li>
+                            {socialLink.map((link, index) => (
+                                <li key={index}>
+                                    <a href={link.href} target='_blank' className='inline-block text-base text-slate-300 hover:text-zinc-50'>{link.name}</a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                     {/* Social Media End */}
@@ -57,12 +68,11 @@ export default function Footer() {
                             Kontak
                         </h2>
                         <ul>
-                            <li>
-                                <a href='mailto:naufalakbar378@gmail.com' target='_blank' className='inline-block text-base text-slate-300 hover:text-zinc-50'>Email</a>
-                            </li>
-                            <li>
-                                <a href='https://www.linkedin.com/public-profile/in/nuflakbrr' target='_blank' className='inline-block text-base text-slate-300 hover:text-zinc-50'>LinkedIn</a>
-                            </li>
+                            {contactLink.map((link, index) => (
+                                <li key={index}>
+                                    <a href={link.href} target='_blank' className='inline-block text-base text-slate-300 hover:text-zinc-50'>{link.name}</a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                     {/* Contact End */}
