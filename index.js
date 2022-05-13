@@ -11,7 +11,7 @@ const app = express()
 
 app.get("/api", (req, res) => {
     res.json({
-        message: "Welcome to KuyLaundry API 🚀",
+        message: "Welcome to KuyLaundry Backend API 🚀",
         endpoints: [{
             admin: [{
                 getAllData: "/api/admin/",
@@ -34,7 +34,7 @@ app.get("/api", (req, res) => {
                 getAllData: "/api/outlet/",
                 getDataById: "/api/outlet/:id",
                 addData: "/api/outlet/",
-                updateData: "/api/outlet/",
+                updateData: "/api/outlet/:id",
                 deleteData: "/api/outlet/:id",
                 status: 200
             }],
@@ -42,7 +42,7 @@ app.get("/api", (req, res) => {
                 getAllData: "/api/package/",
                 getDataById: "/api/package/:id",
                 addData: "/api/package/",
-                updateData: "/api/package/",
+                updateData: "/api/package/:id",
                 deleteData: "/api/package/:id",
                 status: 200
             }],
@@ -50,9 +50,17 @@ app.get("/api", (req, res) => {
                 getAllData: "/api/transaction/",
                 getDataById: "/api/transaction/:id",
                 addData: "/api/transaction/",
-                updateData: "/api/transaction/",
+                updateData: "/api/transaction/:id",
                 deleteData: "/api/transaction/:id",
-                status: "🚧 on development"
+                status: 200
+            }],
+            transaction_details: [{
+                getAllData: "/api/transaction-detail/",
+                getDataById: "/api/transaction-detail/:id",
+                addData: "/api/transaction-detail/",
+                updateData: "/api/transaction-detail/:id",
+                deleteData: "/api/transaction-detail/:id",
+                status: 200
             }]
         }]
     })
@@ -65,9 +73,11 @@ app.use('/api/admin', require('./api/admin/admin.router'))
 app.use('/api/member', require('./api/member/member.router'))
 app.use('/api/outlet', require('./api/outlet/outlet.router'))
 app.use('/api/package', require('./api/package/package.router'))
+app.use('/api/transaction', require('./api/transaction/transaction.router'))
+app.use('/api/transaction-detail', require('./api/transactionDetail/detail.router'))
 
 app.use(errorHandler)
 
 app.listen(port, () => {
-    console.log(`Server is running on port http://localhost:${port}🚀`)
+    console.log(`Server is running on port http://localhost:${port} 🚀`)
 })
