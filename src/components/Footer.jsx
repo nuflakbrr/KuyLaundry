@@ -5,7 +5,7 @@ export default function Footer() {
     const year = new Date().getFullYear()
 
     return (
-        <footer className='pt-24 pb-12 max-w-7xl mx-auto'>
+        <footer className='pt-24 pb-12 px-5 max-w-7xl mx-auto'>
             <div className='container'>
                 <div className='flex flex-wrap'>
                     {/* Logo */}
@@ -26,10 +26,10 @@ export default function Footer() {
                                 <NavLink to='/' className='inline-block text-base text-slate-300 hover:text-zinc-50'>Beranda</NavLink>
                             </li>
                             <li>
-                                <NavLink to='/login' className='inline-block text-base text-slate-300 hover:text-zinc-50'>Login</NavLink>
+                                <NavLink to='/developers' className='inline-block text-base text-slate-300 hover:text-zinc-50'>Developer</NavLink>
                             </li>
                             <li>
-                                <NavLink to='/developers' className='inline-block text-base text-slate-300 hover:text-zinc-50'>Developer</NavLink>
+                                <NavLink to='/login' className='inline-block text-base text-slate-300 hover:text-zinc-50'>Login</NavLink>
                             </li>
                         </ul>
                     </div>
@@ -54,7 +54,7 @@ export default function Footer() {
                     {/* Contact */}
                     <div className='w-full px-4 mb-12 md:w-1/5'>
                         <h2 className='font-semibold text-xl text-white mb-5'>
-                            Contact
+                            Kontak
                         </h2>
                         <ul>
                             <li>
