@@ -1,12 +1,12 @@
 import React from 'react'
-import { Navbar } from '../components'
+import { Footer, Navbar } from '../components'
 
 export default function Home() {
     return (
         <div className='bg-gray-900'>
             <Navbar />
             <section className='text-white body-font'>
-                <div className='container px-5 py-24 mx-auto'>
+                <div className='container px-5 py-16 mx-auto'>
                     <div className='text-center mb-20'>
                         <h1 className='sm:text-3xl text-2xl font-bold text-center title-font text-white mb-4'>Selamat Datang di <span className='text-sky-500'>Kuy</span>Laundry! 🚀</h1>
                     </div>
@@ -89,6 +89,7 @@ export default function Home() {
                     </button>
                 </div>
             </section>
+            <Footer />
         </div>
     )
 }
