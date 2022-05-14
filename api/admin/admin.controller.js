@@ -147,7 +147,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
             _id: admin._id,
             message: 'Login Successful',
             user: admin,
-            token: generateToken(admin._id)
+            token: generateToken(admin)
         })
     } else {
         res.status(400).json({
@@ -158,8 +158,8 @@ const loginAdmin = asyncHandler(async (req, res) => {
     }
 })
 
-const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' })
+const generateToken = (admin) => {
+    return jwt.sign({ admin }, process.env.JWT_SECRET, { expiresIn: '30d' })
 }
 
 module.exports = {
