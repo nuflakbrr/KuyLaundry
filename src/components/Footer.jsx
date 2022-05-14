@@ -22,7 +22,7 @@ export default function Footer() {
     ]
 
     return (
-        <footer className='pt-24 pb-12 px-5 max-w-7xl mx-auto'>
+        <footer className='bg-gray-900 pt-24 pb-12 px-5 max-w-7xl mx-auto'>
             <div className='container'>
                 <div className='flex flex-wrap'>
                     {/* Logo */}
