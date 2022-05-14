@@ -6,7 +6,7 @@ const cookiesName = 'accessToken'
 
 export default {
     getCookies: () => cookie.get(cookiesName),
-    createCookie: (value) => cookie.set(cookiesName, value),
-    deleteCookie: () => cookie.remove(cookiesName),
+    createCookie: (value) => cookie.set(cookiesName, value, { sameSite: 'strict' }),
+    // deleteCookie: () => cookie.remove(cookiesName),
     getDecodedCookie: () => jwtDecode(cookie.get(cookiesName))
 }
