@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import { Developer, Home, Login } from './pages'
+import { Developer, Home, Login, NotFound } from './pages'
 import { Dashboard, Member, Outlet, Package, Register, User } from './pages/admin'
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
       <Route path="/admin/transaction" element={<Member />} />
       <Route path="/admin/user" element={<User />} />
       <Route path="/admin/register" element={<Register />} />
+      <Route path="/*" element={<NotFound />} />
     </Routes>
   )
 }
