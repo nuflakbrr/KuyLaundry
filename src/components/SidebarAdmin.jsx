@@ -111,12 +111,12 @@ export default function SidebarAdmin() {
                         </h6>
 
                         <ul className='md:flex-col md:min-w-full flex flex-col list-none md:mb-4'>
-                            <li className='inline-flex'>
+                            <li className='items-center'>
                                 <NavLink className={activeClassses('/admin/user')} to='/admin/user'>
                                     <FaUserAlt className='mr-2 text-lg' />Petugas
                                 </NavLink>
                             </li>
-                            <li className='inline-flex'>
+                            <li className='items-center'>
                                 <Link className={activeClassses('/admin/logout')} to='/admin/logout' onClick={logout}>
                                     <FaSignOutAlt className='mr-2 text-lg' />Keluar
                                 </Link>
