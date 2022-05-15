@@ -140,7 +140,7 @@ export default function User() {
                                                         </div>
                                                     </td>
                                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                        <Link to={`/admin/user/edit/${val._id}`} className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Ubah</Link>
+                                                        <Link to={`/admin/user/edit/${val._id}`} className="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Ubah</Link>
                                                     </td>
                                                 </tr>
                                             )
