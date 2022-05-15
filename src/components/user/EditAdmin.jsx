@@ -32,11 +32,12 @@ export default function EditAdmin() {
             })
     }, [])
 
+    // Array Role For Select
     const role = [
         { role: 'admin', title: 'Admin' }, { role: 'cashier', title: 'Kasir' }, { role: 'owner', title: 'Pemilik' }
     ]
 
-    // PUT Update Data Admin
+    // PUT Data Admin
     const { handleSubmit, register } = useForm()
 
     const onSubmit = async (data) => {
@@ -59,6 +60,21 @@ export default function EditAdmin() {
             }
         } catch (error) {
             setIsUpdateAdminError(true)
+        }
+    }
+
+    // DELETE Data Admin
+    const dropAdmin = () => {
+        if (window.confirm("Apakah Anda yakin menghapus data ini?")) {
+            axios.delete(`/admin/${id}`, { headers: headerConfig })
+                .then(res => {
+                    console.log(res.data.message)
+                    alert(res.data.message)
+                    window.location.href = '/admin/user'
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
     }
 
@@ -131,6 +147,11 @@ export default function EditAdmin() {
                                 </button>
                             </div>
                         </form>
+                        <div className='mt-4'>
+                            <button className='bg-red-500 hover:bg-red-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={dropAdmin}>
+                                Hapus Data
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>

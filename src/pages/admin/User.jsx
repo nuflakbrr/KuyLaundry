@@ -141,8 +141,6 @@ export default function User() {
                                                     </td>
                                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                         <Link to={`/admin/user/edit/${val._id}`} className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Ubah</Link>
-                                                        <span className='px-2'>|</span>
-                                                        <Link to={`/admin/user/delete/${val._id}`} className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Hapus</Link>
                                                     </td>
                                                 </tr>
                                             )
