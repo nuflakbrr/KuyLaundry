@@ -68,7 +68,6 @@ export default function Dashboard() {
     // Function to GET Member By Id
     const getMemberById = (memberId) => {
         const id = dataTransaction[0].memberId
-        console.log(id)
 
         axios.get(`/member/${id}`, { headers: headerConfig })
             .then(res => {
@@ -84,11 +83,9 @@ export default function Dashboard() {
     // Function to GET Admin By Id
     const getAdminById = (adminId) => {
         const id = dataTransaction[0].adminId
-        console.log(id)
 
         axios.get(`/admin/${id}`, { headers: headerConfig })
             .then(res => {
-                console.log(res.data.data.name)
                 setAdminName(res.data.data.name)
             })
             .catch(err => {
