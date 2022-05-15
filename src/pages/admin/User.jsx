@@ -57,6 +57,14 @@ export default function User() {
                                         <tr>
                                             <th
                                                 className="px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider">
+                                                No
+                                            </th>
+                                            <th
+                                                className="px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider">
+                                                Id Petugas
+                                            </th>
+                                            <th
+                                                className="px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider">
                                                 Nama
                                             </th>
                                             <th
@@ -77,6 +85,20 @@ export default function User() {
                                         {data.map((val, index) => {
                                             return (
                                                 <tr key={index}>
+                                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                        <div className='flex items-center'>
+                                                            <p className='text-gray-900 whitespace-no-wrap'>
+                                                                {index + 1}
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                        <div className='flex items-center'>
+                                                            <p className='text-gray-900 whitespace-no-wrap'>
+                                                                {val._id}
+                                                            </p>
+                                                        </div>
+                                                    </td>
                                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                         <div className='flex items-center'>
                                                             <div className="flex-shrink-0 w-10 h-10">
