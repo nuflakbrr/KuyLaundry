@@ -75,7 +75,7 @@ export default function SidebarAdmin() {
                         <div className='md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200'>
                             <div className='flex flex-wrap'>
                                 <div className='w-6/12'>
-                                    <NavLink className='md:block text-left text-white md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm font-bold p-4 px-0' to='/'>
+                                    <NavLink className='md:block text-left text-white md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm font-bold p-4 px-0' to='/admin/dashboard'>
                                         <h1 className='text-white font-bold text-xl'><span className='text-sky-500'>Kuy</span>Laundry</h1>
                                     </NavLink>
                                 </div>
