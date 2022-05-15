@@ -64,7 +64,7 @@ export default function Package() {
                                             </th>
                                             <th
                                                 className="px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider">
-                                                Ubah
+                                                Aksi
                                             </th>
                                         </tr>
                                     </thead>
