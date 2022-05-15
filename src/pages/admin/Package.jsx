@@ -30,7 +30,7 @@ export default function Package() {
             <SidebarAdmin />
             <section className='bg-gray-900 md:ml-64 min-h-screen'>
                 <div className="p-10 rounded-md w-full">
-                    <div className=" flex items-center justify-between pb-6">
+                    <div className="flex items-center justify-between pb-6">
                         <div>
                             <h2 className="text-white text-2xl font-semibold">Daftar Paket Jasa</h2>
                         </div>
