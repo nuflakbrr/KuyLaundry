@@ -29,41 +29,41 @@ export default function Package() {
         <>
             <SidebarAdmin />
             <section className='bg-gray-900 md:ml-64 min-h-screen'>
-                <div className="p-10 rounded-md w-full">
-                    <div className="flex items-center justify-between pb-6">
+                <div className='p-10 rounded-md w-full'>
+                    <div className='flex items-center justify-between pb-6'>
                         <div>
-                            <h2 className="text-white text-2xl font-semibold">Daftar Paket Jasa</h2>
+                            <h2 className='text-white text-2xl font-semibold'>Daftar Paket Jasa</h2>
                         </div>
-                        <div className="flex flex-wrap items-center justify-between">
-                            <div className="lg:ml-40 ml-10 space-x-8">
-                                <Link to='/admin/package/add' className="bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Tambah Paket Jasa</Link>
+                        <div className='flex flex-wrap items-center justify-between'>
+                            <div className='lg:ml-40 ml-10 space-x-8'>
+                                <Link to='/admin/package/add' className='bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'>Tambah Paket Jasa</Link>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-                            <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                                <table className="min-w-full leading-normal">
+                        <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
+                            <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
+                                <table className='min-w-full leading-normal'>
                                     <thead>
                                         <tr>
                                             <th
-                                                className="px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider">
+                                                className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
                                                 No
                                             </th>
                                             <th
-                                                className="px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider">
+                                                className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
                                                 Id Paket Jasa
                                             </th>
                                             <th
-                                                className="px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider">
+                                                className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
                                                 Nama
                                             </th>
                                             <th
-                                                className="px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider">
+                                                className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
                                                 Harga
                                             </th>
                                             <th
-                                                className="px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider">
+                                                className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
                                                 Aksi
                                             </th>
                                         </tr>
@@ -72,21 +72,21 @@ export default function Package() {
                                         {data.map((val, index) => {
                                             return (
                                                 <tr key={index}>
-                                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                                                         <div className='flex items-center'>
                                                             <p className='text-gray-900 whitespace-no-wrap'>
                                                                 {index + 1}
                                                             </p>
                                                         </div>
                                                     </td>
-                                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                                                         <div className='flex items-center'>
                                                             <p className='text-gray-900 whitespace-no-wrap'>
                                                                 {val._id}
                                                             </p>
                                                         </div>
                                                     </td>
-                                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                                                         <div className='flex items-center'>
                                                             {val.name === 'kiloan' && (
                                                                 <p className='text-gray-900 whitespace-no-wrap'>
@@ -110,17 +110,17 @@ export default function Package() {
                                                             )}
                                                         </div>
                                                     </td>
-                                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                                                         <div className='flex items-center'>
                                                             <p className='text-gray-900 whitespace-no-wrap'>
                                                                 Rp {val.price}
                                                             </p>
                                                         </div>
                                                     </td>
-                                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                        <Link to={`/admin/package/edit/${val._id}`} className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Ubah</Link>
+                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                        <Link to={`/admin/package/edit/${val._id}`} className='bg-green-500 hover:bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'>Ubah</Link>
                                                         <span className='px-2'>|</span>
-                                                        <Link to={`/admin/package/delete/${val._id}`} className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Hapus</Link>
+                                                        <Link to={`/admin/package/delete/${val._id}`} className='bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'>Hapus</Link>
                                                     </td>
                                                 </tr>
                                             )
