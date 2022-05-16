@@ -88,7 +88,7 @@ const updateAdmin = asyncHandler(async (req, res) => {
 
     const checkAdminIfExist = await Admin.findById(req.params.id)
 
-    if (!req.body.name || !req.body.email || !req.body.password || !req.body.role) {
+    if (!req.body.name || !req.body.email || !req.body.role) {
         return res.status(400).json({
             success: 0,
             message: 'Please provide all required fields'
