@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { FaUserPlus } from 'react-icons/fa'
 
 import axios from '../../config/axios'
 import { SidebarAdmin } from '../'
@@ -84,8 +85,8 @@ export default function Register() {
                                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline' id='password' type='password' placeholder='******************' {...register('password', { required: true })} />
                             </div>
                             <div className='mt-4'>
-                                <button className='bg-sky-500 hover:bg-sky-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' type='submit'>
-                                    Register
+                                <button className='flex items-center justify-center bg-sky-500 hover:bg-sky-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' type='submit'>
+                                    <FaUserPlus className='mr-2' /> Tambah Data Petugas
                                 </button>
                             </div>
                         </form>
