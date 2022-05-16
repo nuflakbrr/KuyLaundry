@@ -6,11 +6,14 @@ import axios from '../../config/axios'
 import { SidebarAdmin } from '../'
 
 export default function Register() {
+    // Reuired State
     const [isRegisterError, setIsRegisterError] = useState()
     const [isRegisterSuccess, setIsRegisterSuccess] = useState()
 
+    // Define Validate Form
     const { handleSubmit, register } = useForm()
 
+    // POST Data From Register Admin Form
     const onSubmit = async (data) => {
         const body = {
             name: data.name,
