@@ -91,7 +91,7 @@ export default function EditOutlet() {
                             )}
                             {isUpdateOutletSuccess && (
                                 <div className='mt-4 bg-green-500 p-3 rounded'>
-                                    <p className='text-white text-sm font-bold'>Data member berhasil diubah!</p>
+                                    <p className='text-white text-sm font-bold'>Data outlet berhasil diubah!</p>
                                 </div>
                             )}
                             <div className='mt-4'>
