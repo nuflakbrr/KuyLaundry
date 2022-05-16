@@ -22,7 +22,7 @@ export default function EditMember() {
     // Authorization Config
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
-    // GET Data Admin from Params
+    // GET Data Member from Params
     useEffect(() => {
         axios.get(`/member/${id}`, { headers: headerConfig })
             .then(res => {
