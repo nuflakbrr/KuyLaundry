@@ -93,8 +93,8 @@ export default function User() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {
-                                            filteredResults.length && (
+                                        {/* {
+                                            !filteredResults.length && (
                                                 <tr>
                                                     <td colSpan="6" className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                         <p className='text-gray-900 text-center'>
@@ -103,7 +103,7 @@ export default function User() {
                                                     </td>
                                                 </tr>
                                             )
-                                        }
+                                        } */}
                                         {
                                             search.length > 1 ? (
                                                 filteredResults.map((val, index) => (
