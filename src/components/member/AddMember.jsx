@@ -82,8 +82,8 @@ export default function AddMember() {
                                 </label>
                                 <select className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='role' name='role' {...register('gender', { required: true })}>
                                     <option defaultValue disabled>Pilih Jenis Kelamin</option>
-                                    <option value='male'>Laki-laki</option>
-                                    <option value='female'>Perempuan</option>
+                                    <option value='male'>male</option>
+                                    <option value='female'>female</option>
                                 </select>
                             </div>
                             <div className='mt-4'>
