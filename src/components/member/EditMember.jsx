@@ -9,7 +9,6 @@ import { SidebarAdmin } from '../'
 export default function EditMember() {
     // Required State
     const [data, setData] = useState([])
-    const [gender, setGender] = useState()
 
     const [isUpdateAdminError, setIsUpdateAdminError] = useState()
     const [isUpdateAdminSuccess, setIsUpdateAdminSuccess] = useState()
