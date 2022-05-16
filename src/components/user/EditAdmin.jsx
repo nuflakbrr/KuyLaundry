@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { FaUserEdit, FaTrash } from 'react-icons/fa'
 
 import axios from '../../config/axios'
 import cookies from '../../config/cookie'
@@ -142,14 +143,14 @@ export default function EditAdmin() {
                                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline' id='password' type='password' placeholder='******************' {...register('password')} />
                             </div>
                             <div className='mt-4'>
-                                <button className='bg-sky-500 hover:bg-sky-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' type='submit'>
-                                    Update Data
+                                <button className='flex items-center justify-center bg-sky-500 hover:bg-sky-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' type='submit'>
+                                    <FaUserEdit className='mr-2 text-xl' /> Update Data
                                 </button>
                             </div>
                         </form>
                         <div className='mt-4'>
-                            <button className='bg-red-500 hover:bg-red-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={dropAdmin}>
-                                Hapus Data
+                            <button className='flex items-center justify-center bg-red-500 hover:bg-red-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={dropAdmin}>
+                                <FaTrash className='mr-2' /> Hapus Data
                             </button>
                         </div>
                     </div>
