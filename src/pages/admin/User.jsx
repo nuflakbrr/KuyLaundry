@@ -93,17 +93,17 @@ export default function User() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {/* {
-                                            !filteredResults.length && (
+                                        {
+                                            search.length > 1 && filteredResults.length === 0 && (
                                                 <tr>
-                                                    <td colSpan='6' className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                    <td colSpan='8' className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                                                         <p className='text-gray-900 text-center'>
                                                             Maaf, data yang anda cari tidak dapat ditemukan.
                                                         </p>
                                                     </td>
                                                 </tr>
                                             )
-                                        } */}
+                                        }
                                         {
                                             search.length > 1 ? (
                                                 filteredResults.map((val, index) => (
