@@ -121,7 +121,7 @@ export default function EditMember() {
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='gender'>
                                     Jenis Kelamin
                                 </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='gender' type='text' value={data.gender} placeholder='Nama' disabled />
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='gender' type='text' value={data.gender} placeholder='Jenis Kelamin' disabled />
                             </div>
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='phone'>
