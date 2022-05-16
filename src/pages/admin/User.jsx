@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { FaUserPlus, FaEdit } from 'react-icons/fa'
 
 import axios from '../../config/axios'
 import cookies from '../../config/cookie'
@@ -55,7 +56,7 @@ export default function User() {
                                 <input className="bg-gray-50 outline-none ml-1 block" type="text" name="search" id="search" placeholder="search..." onChange={(event) => searchItems(event.target.value)} />
                             </div>
                             <div className="lg:ml-20 ml-10 space-x-8">
-                                <Link to='/admin/user/add' className="bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Tambah Petugas</Link>
+                                <Link to='/admin/user/add' className="flex items-center justify-center bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><FaUserPlus className='mr-2' /> Tambah Petugas</Link>
                             </div>
                         </div>
                     </div>
@@ -92,6 +93,17 @@ export default function User() {
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {
+                                            filteredResults.length === 0 && (
+                                                <tr>
+                                                    <td colSpan="6" className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                        <p className='text-gray-900 text-center'>
+                                                            Maaf, data yang anda cari tidak dapat ditemukan.
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        }
                                         {
                                             search.length > 1 ? (
                                                 filteredResults.map((val, index) => (
@@ -139,7 +151,7 @@ export default function User() {
                                                             </div>
                                                         </td>
                                                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <Link to={`/admin/user/edit/${val._id}`} className="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Ubah</Link>
+                                                            <Link to={`/admin/user/edit/${val._id}`} className="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><FaEdit />Ubah</Link>
                                                         </td>
                                                     </tr>
                                                 ))
@@ -190,7 +202,7 @@ export default function User() {
                                                                 </div>
                                                             </td>
                                                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                                <Link to={`/admin/user/edit/${val._id}`} className="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Ubah</Link>
+                                                                <Link to={`/admin/user/edit/${val._id}`} className="flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><FaEdit className='mr-2' /> Ubah</Link>
                                                             </td>
                                                         </tr>
                                                     )
