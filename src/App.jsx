@@ -44,6 +44,11 @@ function App() {
       <Route path='/admin/user' element={<User />} />
       <Route path='/admin/user/add' element={<Register />} />
       <Route path='/admin/user/edit/*' element={<EditAdmin />} />
+
+      {/* Cashier Side Route */}
+
+      {/* Owner Side Route */}
+
       <Route path='/*' element={<NotFound />} />
     </Routes>
   )
