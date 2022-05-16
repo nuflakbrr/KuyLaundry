@@ -6,17 +6,20 @@ import cookies from '../../config/cookie'
 import { SidebarAdmin } from '../'
 
 export default function AddMember() {
+    // Reuired State
     const [isRegisterError, setIsRegisterError] = useState()
     const [isRegisterSuccess, setIsRegisterSuccess] = useState()
 
+    // Define Validate Form
     const { handleSubmit, register } = useForm()
 
     // Get Data from Cookie
     const cookie = cookies.getCookies()
 
-    // Get All Data Member from API
+    // Header Config
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
+    // POST Data From Register Member Form
     const onSubmit = async (data) => {
         const body = {
             name: data.name,
