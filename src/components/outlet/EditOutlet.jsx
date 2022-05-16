@@ -36,7 +36,7 @@ export default function EditOutlet() {
     // Define Validate form
     const { handleSubmit, register } = useForm()
 
-    // PUT Data Admin
+    // PUT Data Outlet
     const onSubmit = async (data) => {
         const body = {
             name: data.name,
@@ -60,7 +60,7 @@ export default function EditOutlet() {
         }
     }
 
-    // DELETE Data Admin
+    // DELETE Data Outlet
     const dropOutlet = () => {
         if (window.confirm('Apakah Anda yakin menghapus data ini?')) {
             axios.delete(`/outlet/${id}`, { headers: headerConfig })
