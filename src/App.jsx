@@ -3,18 +3,20 @@ import { Routes, Route } from 'react-router-dom'
 
 import { Developer, Home, Login, NotFound } from './pages'
 import { Dashboard, Member, Outlet, Package, Transaction, User } from './pages/admin'
+import { Dashboard as DashboardCashier, Member as MemberCashier, Transaction as TransactionCashier } from './pages/cashier'
 
 // Outlet
-import { AddOutlet, EditOutlet } from './components/outlet'
+import { AddOutlet, EditOutlet } from './components/admin/outlet'
 
 // Package
-import { AddPackage, EditPackage } from './components/package'
+import { AddPackage, EditPackage } from './components/admin/package'
 
 // Member
-import { AddMember, EditMember } from './components/member'
+import { AddMember, EditMember } from './components/admin/member'
+import { AddMember as AddMemberCashier, EditMember as EditMemberCashier } from './components/cashier/member'
 
 // User
-import { EditAdmin, Register } from './components/user'
+import { EditAdmin, Register } from './components/admin/user'
 
 
 function App() {
@@ -46,6 +48,13 @@ function App() {
       <Route path='/admin/user/edit/*' element={<EditAdmin />} />
 
       {/* Cashier Side Route */}
+      <Route path='/cashier/dashboard' element={<DashboardCashier />} />
+
+      <Route path='/cashier/member' element={<MemberCashier />} />
+      <Route path='/cashier/member/add' element={<AddMemberCashier />} />
+      <Route path='/cashier/member/edit/*' element={<EditMemberCashier />} />
+
+      <Route path='/cashier/transaction' element={<TransactionCashier />} />
 
       {/* Owner Side Route */}
 
