@@ -66,7 +66,7 @@ export default function EditAdmin() {
 
     // DELETE Data Admin
     const dropAdmin = () => {
-        if (window.confirm("Apakah Anda yakin menghapus data ini?")) {
+        if (window.confirm('Apakah Anda yakin menghapus data ini?')) {
             axios.delete(`/admin/${id}`, { headers: headerConfig })
                 .then(res => {
                     console.log(res.data.message)
