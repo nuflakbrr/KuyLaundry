@@ -44,6 +44,8 @@ export default function EditAdmin() {
     // PUT Data Admin
     const onSubmit = async (data) => {
         const body = {
+            name: data.name,
+            email: data.email,
             password: data.password,
             role: data.role
         }
@@ -54,7 +56,6 @@ export default function EditAdmin() {
             if (response.data.message === 'Admin not found') {
                 throw new Error(response.data.message)
             } else if (response.data.message === 'Admin updated successfully') {
-                console.log(response.data.message)
                 setIsUpdateAdminSuccess(true)
                 setTimeout(() => {
                     window.location.href = '/admin/user'
@@ -70,7 +71,6 @@ export default function EditAdmin() {
         if (window.confirm('Apakah Anda yakin menghapus data ini?')) {
             axios.delete(`/admin/${id}`, { headers: headerConfig })
                 .then(res => {
-                    console.log(res.data.message)
                     alert(res.data.message)
                     window.location.href = '/admin/user'
                 })
@@ -104,17 +104,29 @@ export default function EditAdmin() {
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='idAdmin'>
                                     Id Petugas
                                 </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='id' type='text' value={data._id} placeholder='Id Petugas' disabled />
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='id' type='text' value={data._id} placeholder='Id Petugas' disabled />
                             </div>
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='name'>
                                     Nama
                                 </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='name' type='text' value={data.name} placeholder='Nama' disabled />
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='name' type='text' value={data.name} placeholder='Nama' disabled />
+                            </div>
+                            <div className='mt-4'>
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='name'>
+                                    Ganti Nama
+                                </label>
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='name' type='text' placeholder='Nama' {...register('name')} />
                             </div>
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='role'>
-                                    Role
+                                    Role Saat Ini
+                                </label>
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='role' type='text' value={data.role} placeholder='Role Saat Ini' disabled />
+                            </div>
+                            <div className='mt-4'>
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='role'>
+                                    Ganti Role
                                 </label>
                                 <select className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='role' name='role' {...register('role')}>
                                     <option defaultValue disabled>Pilih Role</option>
@@ -135,7 +147,13 @@ export default function EditAdmin() {
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='email'>
                                     Email
                                 </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='email' type='email' value={data.email} placeholder='Email' disabled />
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='email' type='email' value={data.email} placeholder='Email' disabled />
+                            </div>
+                            <div className='mt-4'>
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='email'>
+                                    Ganti Email
+                                </label>
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='email' type='email' placeholder='Email' {...register('email')} />
                             </div>
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='password'>
