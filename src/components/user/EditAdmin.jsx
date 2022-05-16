@@ -38,9 +38,10 @@ export default function EditAdmin() {
         { role: 'admin', title: 'Admin' }, { role: 'cashier', title: 'Kasir' }, { role: 'owner', title: 'Pemilik' }
     ]
 
-    // PUT Data Admin
+    // Define Validate form
     const { handleSubmit, register } = useForm()
 
+    // PUT Data Admin
     const onSubmit = async (data) => {
         const body = {
             password: data.password,
