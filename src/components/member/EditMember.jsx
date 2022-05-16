@@ -60,7 +60,7 @@ export default function EditMember() {
     }
 
     // DELETE Data Admin
-    const dropAdmin = () => {
+    const dropMember = () => {
         if (window.confirm('Apakah Anda yakin menghapus data ini?')) {
             axios.delete(`/member/${id}`, { headers: headerConfig })
                 .then(res => {
@@ -142,7 +142,7 @@ export default function EditMember() {
                             </div>
                         </form>
                         <div className='mt-4'>
-                            <button className='flex items-center justify-center bg-red-500 hover:bg-red-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={dropAdmin}>
+                            <button className='flex items-center justify-center bg-red-500 hover:bg-red-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={dropMember}>
                                 <FaTrash className='mr-2' /> Hapus Data
                             </button>
                         </div>
