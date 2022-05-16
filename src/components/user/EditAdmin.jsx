@@ -101,7 +101,7 @@ export default function EditAdmin() {
                                 </div>
                             )}
                             <div className='mt-4'>
-                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='name'>
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='idAdmin'>
                                     Id Petugas
                                 </label>
                                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='id' type='text' value={data._id} placeholder='Id Petugas' disabled />
@@ -132,7 +132,7 @@ export default function EditAdmin() {
                                 </select>
                             </div>
                             <div className='mt-4'>
-                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='name'>
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='email'>
                                     Email
                                 </label>
                                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='email' type='email' value={data.email} placeholder='Email' disabled />
