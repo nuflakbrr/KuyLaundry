@@ -10,8 +10,8 @@ export default function EditMember() {
     // Required State
     const [data, setData] = useState([])
 
-    const [isUpdateAdminError, setIsUpdateAdminError] = useState()
-    const [isUpdateAdminSuccess, setIsUpdateAdminSuccess] = useState()
+    const [isUpdateMemberError, setIsUpdateMemberError] = useState()
+    const [isUpdateMemberSuccess, setIsUpdateMemberSuccess] = useState()
 
     // Get Data from Cookie
     const cookie = cookies.getCookies()
@@ -49,13 +49,13 @@ export default function EditMember() {
             if (response.data.message === 'Member not found') {
                 throw new Error(response.data.message)
             } else if (response.data.message === 'Member updated successfully') {
-                setIsUpdateAdminSuccess(true)
+                setIsUpdateMemberSuccess(true)
                 setTimeout(() => {
                     window.location.href = '/admin/member'
                 }, 1500)
             }
         } catch (error) {
-            setIsUpdateAdminError(true)
+            setIsUpdateMemberError(true)
         }
     }
 
@@ -83,12 +83,12 @@ export default function EditMember() {
                             <h1 className='font-bold text-xl'>Ubah Pelanggan</h1>
                         </div>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            {isUpdateAdminError && (
+                            {isUpdateMemberError && (
                                 <div className='mt-4 bg-red-500 p-3 rounded'>
                                     <p className='text-white text-sm font-bold'>Maaf, gagal untuk mengubah data!</p>
                                 </div>
                             )}
-                            {isUpdateAdminSuccess && (
+                            {isUpdateMemberSuccess && (
                                 <div className='mt-4 bg-green-500 p-3 rounded'>
                                     <p className='text-white text-sm font-bold'>Data member berhasil diubah!</p>
                                 </div>
