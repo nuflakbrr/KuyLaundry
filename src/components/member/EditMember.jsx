@@ -59,7 +59,7 @@ export default function EditMember() {
         }
     }
 
-    // DELETE Data Admin
+    // DELETE Data Member
     const dropMember = () => {
         if (window.confirm('Apakah Anda yakin menghapus data ini?')) {
             axios.delete(`/member/${id}`, { headers: headerConfig })
