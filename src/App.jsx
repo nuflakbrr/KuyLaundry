@@ -42,7 +42,7 @@ function App() {
       <Route path='/admin/member/add' element={<AddMember />} />
       <Route path='/admin/member/edit/*' element={<EditMember />} />
 
-      <Route path='/admin/transaction' element={<Transaction />} />
+      <Route path='/admin/transaction/add' element={<Transaction />} />
 
       <Route path='/admin/user' element={<User />} />
       <Route path='/admin/user/add' element={<Register />} />
@@ -55,7 +55,7 @@ function App() {
       <Route path='/cashier/member/add' element={<AddMemberCashier />} />
       <Route path='/cashier/member/edit/*' element={<EditMemberCashier />} />
 
-      <Route path='/cashier/transaction' element={<TransactionCashier />} />
+      <Route path='/cashier/transaction/add' element={<TransactionCashier />} />
 
       {/* Owner Side Route */}
       <Route path='/owner/dashboard' element={<DashboardOwner />} />
