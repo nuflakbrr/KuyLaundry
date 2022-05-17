@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Developer, Home, Login, NotFound } from './pages'
 import { Dashboard, Member, Outlet, Package, Transaction, User } from './pages/admin'
 import { Dashboard as DashboardCashier, Member as MemberCashier, Transaction as TransactionCashier } from './pages/cashier'
+import { Dashboard as DashboardOwner } from './pages/owner'
 
 // Outlet
 import { AddOutlet, EditOutlet } from './components/admin/outlet'
@@ -57,6 +58,7 @@ function App() {
       <Route path='/cashier/transaction' element={<TransactionCashier />} />
 
       {/* Owner Side Route */}
+      <Route path='/owner/dashboard' element={<DashboardOwner />} />
 
       <Route path='/*' element={<NotFound />} />
     </Routes>
