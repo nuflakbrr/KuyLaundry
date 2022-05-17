@@ -117,9 +117,9 @@ export default function SidebarAdmin() {
                                 </NavLink>
                             </li>
                             <li className='items-center'>
-                                <Link className={activeClassses('/admin/logout')} to='/admin/logout' onClick={logout}>
+                                <button className={inActiveClass} onClick={logout}>
                                     <FaSignOutAlt className='mr-2 text-lg' />Keluar
-                                </Link>
+                                </button>
                             </li>
                         </ul>
                     </div>

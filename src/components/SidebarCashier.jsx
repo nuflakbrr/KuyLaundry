@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { AiOutlineClose } from 'react-icons/ai'
-import { FaHome, FaBuilding, FaBox, FaUserAlt, FaShoppingCart, FaSignOutAlt } from 'react-icons/fa'
+import { FaHome, FaUserAlt, FaShoppingCart, FaSignOutAlt } from 'react-icons/fa'
 
 import cookies from '../config/cookie'
 
@@ -110,9 +110,9 @@ export default function SidebarCashier() {
 
                         <ul className='md:flex-col md:min-w-full flex flex-col list-none md:mb-4'>
                             <li className='items-center'>
-                                <Link className={activeClassses('/cashier/logout')} to='/cashier/logout' onClick={logout}>
+                                <button className={inActiveClass} onClick={logout}>
                                     <FaSignOutAlt className='mr-2 text-lg' />Keluar
-                                </Link>
+                                </button>
                             </li>
                         </ul>
                     </div>
