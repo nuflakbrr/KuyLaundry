@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaUserPlus } from 'react-icons/fa'
 
-import axios from '../../config/axios'
-import { SidebarAdmin } from '../'
+import axios from '../../../config/axios'
+import { SidebarAdmin } from '../../'
 
 export default function Register() {
     // Reuired State

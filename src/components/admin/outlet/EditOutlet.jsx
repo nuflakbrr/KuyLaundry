@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 
-import axios from '../../config/axios'
-import cookies from '../../config/cookie'
-import { SidebarAdmin } from '../'
+import axios from '../../../config/axios'
+import cookies from '../../../config/cookie'
+import { SidebarAdmin } from '../../'
 
-export default function EditPackage() {
+export default function EditOutlet() {
     // Required State
     const [data, setData] = useState([])
 
-    const [isUpdatePackageError, setIsUpdatePackageError] = useState()
-    const [isUpdatePackageSuccess, setIsUpdatePackageSuccess] = useState()
+    const [isUpdateOutletError, setIsUpdateOutletError] = useState()
+    const [isUpdateOutletSuccess, setIsUpdateOutletSuccess] = useState()
 
     // Get Data from Cookie
     const cookie = cookies.getCookies()
@@ -22,9 +22,9 @@ export default function EditPackage() {
     // Authorization Config
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
-    // GET Data Package from Params
+    // GET Data Outlet from Params
     useEffect(() => {
-        axios.get(`/package/${id}`, { headers: headerConfig })
+        axios.get(`/outlet/${id}`, { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })
@@ -36,36 +36,37 @@ export default function EditPackage() {
     // Define Validate form
     const { handleSubmit, register } = useForm()
 
-    // PUT Data Package
+    // PUT Data Outlet
     const onSubmit = async (data) => {
         const body = {
             name: data.name,
-            price: data.price,
+            address: data.address,
+            phone: data.phone
         }
 
         try {
-            const response = await axios.put(`/package/${id}`, body, { headers: headerConfig })
+            const response = await axios.put(`/outlet/${id}`, body, { headers: headerConfig })
 
-            if (response.data.message === 'Package not found') {
+            if (response.data.message === 'Outlet not found') {
                 throw new Error(response.data.message)
-            } else if (response.data.message === 'Package updated successfully') {
-                setIsUpdatePackageSuccess(true)
+            } else if (response.data.message === 'Outlet updated successfully') {
+                setIsUpdateOutletSuccess(true)
                 setTimeout(() => {
-                    window.location.href = '/admin/package'
+                    window.location.href = '/admin/outlet'
                 }, 1500)
             }
         } catch (error) {
-            setIsUpdatePackageError(true)
+            setIsUpdateOutletError(true)
         }
     }
 
-    // DELETE Data Package
-    const dropPackage = () => {
+    // DELETE Data Outlet
+    const dropOutlet = () => {
         if (window.confirm('Apakah Anda yakin menghapus data ini?')) {
-            axios.delete(`/package/${id}`, { headers: headerConfig })
+            axios.delete(`/outlet/${id}`, { headers: headerConfig })
                 .then(res => {
                     alert(res.data.message)
-                    window.location.href = '/admin/package'
+                    window.location.href = '/admin/outlet'
                 })
                 .catch(err => {
                     console.log(err)
@@ -83,19 +84,19 @@ export default function EditPackage() {
                             <h1 className='font-bold text-xl'>Ubah Pelanggan</h1>
                         </div>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            {isUpdatePackageError && (
+                            {isUpdateOutletError && (
                                 <div className='mt-4 bg-red-500 p-3 rounded'>
                                     <p className='text-white text-sm font-bold'>Maaf, gagal untuk mengubah data!</p>
                                 </div>
                             )}
-                            {isUpdatePackageSuccess && (
+                            {isUpdateOutletSuccess && (
                                 <div className='mt-4 bg-green-500 p-3 rounded'>
-                                    <p className='text-white text-sm font-bold'>Data paket jasa berhasil diubah!</p>
+                                    <p className='text-white text-sm font-bold'>Data outlet berhasil diubah!</p>
                                 </div>
                             )}
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='idMember'>
-                                    Id Paket Jasa
+                                    Id Outlet
                                 </label>
                                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='id' type='text' value={data._id} placeholder='Id Petugas' disabled />
                             </div>
@@ -112,16 +113,28 @@ export default function EditPackage() {
                                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='address' type='text' placeholder='Nama' {...register('name')} />
                             </div>
                             <div className='mt-4'>
-                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='price'>
-                                    Harga
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='address'>
+                                    Alamat
                                 </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='price' type='text' value={data.price} placeholder='Harga' disabled />
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='address' type='text' value={data.address} placeholder='Alamat' disabled />
                             </div>
                             <div className='mt-4'>
-                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='price'>
-                                    Ganti Harga
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='address'>
+                                    Ganti Alamat
                                 </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='price' type='text' placeholder='Harga' {...register('price')} />
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='address' type='text' placeholder='Alamat' {...register('address')} />
+                            </div>
+                            <div className='mt-4'>
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='phone'>
+                                    No. Telepon
+                                </label>
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='phone' type='text' value={data.phone} placeholder='No. Telepon' disabled />
+                            </div>
+                            <div className='mt-4'>
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='phone'>
+                                    Ganti No. Telepon
+                                </label>
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='phone' type='text' placeholder='No. Telepon' {...register('phone')} />
                             </div>
                             <div className='mt-4'>
                                 <button className='flex items-center justify-center bg-sky-500 hover:bg-sky-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' type='submit'>
@@ -130,7 +143,7 @@ export default function EditPackage() {
                             </div>
                         </form>
                         <div className='mt-4'>
-                            <button className='flex items-center justify-center bg-red-500 hover:bg-red-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={dropPackage}>
+                            <button className='flex items-center justify-center bg-red-500 hover:bg-red-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={dropOutlet}>
                                 <FaTrash className='mr-2' /> Hapus Data
                             </button>
                         </div>

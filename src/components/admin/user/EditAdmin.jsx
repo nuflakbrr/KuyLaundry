@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaUserEdit, FaTrash } from 'react-icons/fa'
 
-import axios from '../../config/axios'
-import cookies from '../../config/cookie'
-import { SidebarAdmin } from '../'
+import axios from '../../../config/axios'
+import cookies from '../../../config/cookie'
+import { SidebarAdmin } from '../../'
 
 export default function EditAdmin() {
     // Required State

@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { FaUserEdit, FaTrash } from 'react-icons/fa'
+import { FaEdit, FaTrash } from 'react-icons/fa'
 
-import axios from '../../config/axios'
-import cookies from '../../config/cookie'
-import { SidebarAdmin } from '../'
+import axios from '../../../config/axios'
+import cookies from '../../../config/cookie'
+import { SidebarAdmin } from '../../'
 
-export default function EditMember() {
+export default function EditPackage() {
     // Required State
     const [data, setData] = useState([])
 
-    const [isUpdateMemberError, setIsUpdateMemberError] = useState()
-    const [isUpdateMemberSuccess, setIsUpdateMemberSuccess] = useState()
+    const [isUpdatePackageError, setIsUpdatePackageError] = useState()
+    const [isUpdatePackageSuccess, setIsUpdatePackageSuccess] = useState()
 
     // Get Data from Cookie
     const cookie = cookies.getCookies()
@@ -22,9 +22,9 @@ export default function EditMember() {
     // Authorization Config
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
-    // GET Data Member from Params
+    // GET Data Package from Params
     useEffect(() => {
-        axios.get(`/member/${id}`, { headers: headerConfig })
+        axios.get(`/package/${id}`, { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })
@@ -36,36 +36,36 @@ export default function EditMember() {
     // Define Validate form
     const { handleSubmit, register } = useForm()
 
-    // PUT Data Member
+    // PUT Data Package
     const onSubmit = async (data) => {
         const body = {
-            address: data.address,
-            phone: data.phone
+            name: data.name,
+            price: data.price,
         }
 
         try {
-            const response = await axios.put(`/member/${id}`, body, { headers: headerConfig })
+            const response = await axios.put(`/package/${id}`, body, { headers: headerConfig })
 
-            if (response.data.message === 'Member not found') {
+            if (response.data.message === 'Package not found') {
                 throw new Error(response.data.message)
-            } else if (response.data.message === 'Member updated successfully') {
-                setIsUpdateMemberSuccess(true)
+            } else if (response.data.message === 'Package updated successfully') {
+                setIsUpdatePackageSuccess(true)
                 setTimeout(() => {
-                    window.location.href = '/admin/member'
+                    window.location.href = '/admin/package'
                 }, 1500)
             }
         } catch (error) {
-            setIsUpdateMemberError(true)
+            setIsUpdatePackageError(true)
         }
     }
 
-    // DELETE Data Member
-    const dropMember = () => {
+    // DELETE Data Package
+    const dropPackage = () => {
         if (window.confirm('Apakah Anda yakin menghapus data ini?')) {
-            axios.delete(`/member/${id}`, { headers: headerConfig })
+            axios.delete(`/package/${id}`, { headers: headerConfig })
                 .then(res => {
                     alert(res.data.message)
-                    window.location.href = '/admin/member'
+                    window.location.href = '/admin/package'
                 })
                 .catch(err => {
                     console.log(err)
@@ -83,19 +83,19 @@ export default function EditMember() {
                             <h1 className='font-bold text-xl'>Ubah Pelanggan</h1>
                         </div>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            {isUpdateMemberError && (
+                            {isUpdatePackageError && (
                                 <div className='mt-4 bg-red-500 p-3 rounded'>
                                     <p className='text-white text-sm font-bold'>Maaf, gagal untuk mengubah data!</p>
                                 </div>
                             )}
-                            {isUpdateMemberSuccess && (
+                            {isUpdatePackageSuccess && (
                                 <div className='mt-4 bg-green-500 p-3 rounded'>
-                                    <p className='text-white text-sm font-bold'>Data member berhasil diubah!</p>
+                                    <p className='text-white text-sm font-bold'>Data paket jasa berhasil diubah!</p>
                                 </div>
                             )}
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='idMember'>
-                                    Id Member
+                                    Id Paket Jasa
                                 </label>
                                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='id' type='text' value={data._id} placeholder='Id Petugas' disabled />
                             </div>
@@ -106,43 +106,31 @@ export default function EditMember() {
                                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='name' type='text' value={data.name} placeholder='Nama' disabled />
                             </div>
                             <div className='mt-4'>
-                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='address'>
-                                    Alamat
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='name'>
+                                    Ganti Nama
                                 </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='address' type='text' value={data.address} placeholder='Alamat' disabled />
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='address' type='text' placeholder='Nama' {...register('name')} />
                             </div>
                             <div className='mt-4'>
-                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='address'>
-                                    Ganti Alamat
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='price'>
+                                    Harga
                                 </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='address' type='text' placeholder='Alamat' {...register('address')} />
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='price' type='text' value={data.price} placeholder='Harga' disabled />
                             </div>
                             <div className='mt-4'>
-                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='gender'>
-                                    Jenis Kelamin
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='price'>
+                                    Ganti Harga
                                 </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='gender' type='text' value={data.gender} placeholder='Jenis Kelamin' disabled />
-                            </div>
-                            <div className='mt-4'>
-                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='phone'>
-                                    No. Telepon
-                                </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='phone' type='text' value={data.phone} placeholder='No. Telepon' disabled />
-                            </div>
-                            <div className='mt-4'>
-                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='phone'>
-                                    Ganti No. Telepon
-                                </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='phone' type='text' placeholder='No. Telepon' {...register('phone')} />
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='price' type='text' placeholder='Harga' {...register('price')} />
                             </div>
                             <div className='mt-4'>
                                 <button className='flex items-center justify-center bg-sky-500 hover:bg-sky-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' type='submit'>
-                                    <FaUserEdit className='mr-2 text-xl' /> Update Data
+                                    <FaEdit className='mr-2 text-xl' /> Update Data
                                 </button>
                             </div>
                         </form>
                         <div className='mt-4'>
-                            <button className='flex items-center justify-center bg-red-500 hover:bg-red-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={dropMember}>
+                            <button className='flex items-center justify-center bg-red-500 hover:bg-red-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={dropPackage}>
                                 <FaTrash className='mr-2' /> Hapus Data
                             </button>
                         </div>

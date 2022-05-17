@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { FaEdit, FaTrash } from 'react-icons/fa'
+import { FaUserEdit, FaTrash } from 'react-icons/fa'
 
-import axios from '../../config/axios'
-import cookies from '../../config/cookie'
-import { SidebarAdmin } from '../'
+import axios from '../../../config/axios'
+import cookies from '../../../config/cookie'
+import { SidebarAdmin } from '../../'
 
-export default function EditOutlet() {
+export default function EditMember() {
     // Required State
     const [data, setData] = useState([])
 
-    const [isUpdateOutletError, setIsUpdateOutletError] = useState()
-    const [isUpdateOutletSuccess, setIsUpdateOutletSuccess] = useState()
+    const [isUpdateMemberError, setIsUpdateMemberError] = useState()
+    const [isUpdateMemberSuccess, setIsUpdateMemberSuccess] = useState()
 
     // Get Data from Cookie
     const cookie = cookies.getCookies()
@@ -22,9 +22,9 @@ export default function EditOutlet() {
     // Authorization Config
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
-    // GET Data Outlet from Params
+    // GET Data Member from Params
     useEffect(() => {
-        axios.get(`/outlet/${id}`, { headers: headerConfig })
+        axios.get(`/member/${id}`, { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })
@@ -36,37 +36,36 @@ export default function EditOutlet() {
     // Define Validate form
     const { handleSubmit, register } = useForm()
 
-    // PUT Data Outlet
+    // PUT Data Member
     const onSubmit = async (data) => {
         const body = {
-            name: data.name,
             address: data.address,
             phone: data.phone
         }
 
         try {
-            const response = await axios.put(`/outlet/${id}`, body, { headers: headerConfig })
+            const response = await axios.put(`/member/${id}`, body, { headers: headerConfig })
 
-            if (response.data.message === 'Outlet not found') {
+            if (response.data.message === 'Member not found') {
                 throw new Error(response.data.message)
-            } else if (response.data.message === 'Outlet updated successfully') {
-                setIsUpdateOutletSuccess(true)
+            } else if (response.data.message === 'Member updated successfully') {
+                setIsUpdateMemberSuccess(true)
                 setTimeout(() => {
-                    window.location.href = '/admin/outlet'
+                    window.location.href = '/admin/member'
                 }, 1500)
             }
         } catch (error) {
-            setIsUpdateOutletError(true)
+            setIsUpdateMemberError(true)
         }
     }
 
-    // DELETE Data Outlet
-    const dropOutlet = () => {
+    // DELETE Data Member
+    const dropMember = () => {
         if (window.confirm('Apakah Anda yakin menghapus data ini?')) {
-            axios.delete(`/outlet/${id}`, { headers: headerConfig })
+            axios.delete(`/member/${id}`, { headers: headerConfig })
                 .then(res => {
                     alert(res.data.message)
-                    window.location.href = '/admin/outlet'
+                    window.location.href = '/admin/member'
                 })
                 .catch(err => {
                     console.log(err)
@@ -84,19 +83,19 @@ export default function EditOutlet() {
                             <h1 className='font-bold text-xl'>Ubah Pelanggan</h1>
                         </div>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            {isUpdateOutletError && (
+                            {isUpdateMemberError && (
                                 <div className='mt-4 bg-red-500 p-3 rounded'>
                                     <p className='text-white text-sm font-bold'>Maaf, gagal untuk mengubah data!</p>
                                 </div>
                             )}
-                            {isUpdateOutletSuccess && (
+                            {isUpdateMemberSuccess && (
                                 <div className='mt-4 bg-green-500 p-3 rounded'>
-                                    <p className='text-white text-sm font-bold'>Data outlet berhasil diubah!</p>
+                                    <p className='text-white text-sm font-bold'>Data member berhasil diubah!</p>
                                 </div>
                             )}
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='idMember'>
-                                    Id Outlet
+                                    Id Member
                                 </label>
                                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='id' type='text' value={data._id} placeholder='Id Petugas' disabled />
                             </div>
@@ -105,12 +104,6 @@ export default function EditOutlet() {
                                     Nama
                                 </label>
                                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='name' type='text' value={data.name} placeholder='Nama' disabled />
-                            </div>
-                            <div className='mt-4'>
-                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='name'>
-                                    Ganti Nama
-                                </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='address' type='text' placeholder='Nama' {...register('name')} />
                             </div>
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='address'>
@@ -123,6 +116,12 @@ export default function EditOutlet() {
                                     Ganti Alamat
                                 </label>
                                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='address' type='text' placeholder='Alamat' {...register('address')} />
+                            </div>
+                            <div className='mt-4'>
+                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='gender'>
+                                    Jenis Kelamin
+                                </label>
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='gender' type='text' value={data.gender} placeholder='Jenis Kelamin' disabled />
                             </div>
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='phone'>
@@ -138,12 +137,12 @@ export default function EditOutlet() {
                             </div>
                             <div className='mt-4'>
                                 <button className='flex items-center justify-center bg-sky-500 hover:bg-sky-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' type='submit'>
-                                    <FaEdit className='mr-2 text-xl' /> Update Data
+                                    <FaUserEdit className='mr-2 text-xl' /> Update Data
                                 </button>
                             </div>
                         </form>
                         <div className='mt-4'>
-                            <button className='flex items-center justify-center bg-red-500 hover:bg-red-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={dropOutlet}>
+                            <button className='flex items-center justify-center bg-red-500 hover:bg-red-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={dropMember}>
                                 <FaTrash className='mr-2' /> Hapus Data
                             </button>
                         </div>
