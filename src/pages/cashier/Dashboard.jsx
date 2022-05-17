@@ -4,7 +4,7 @@ import { FaCartPlus } from 'react-icons/fa'
 
 import axios from '../../config/axios'
 import cookies from '../../config/cookie'
-import { SidebarAdmin } from '../../components'
+import { SidebarCashier } from '../../components'
 
 export default function Dashboard() {
     // Required State
@@ -107,7 +107,7 @@ export default function Dashboard() {
 
     return (
         <>
-            <SidebarAdmin />
+            <SidebarCashier />
             <section className='bg-gray-900 md:ml-64 min-h-screen'>
                 <div className='container'>
                     <div className='flex flex-wrap'>
@@ -177,7 +177,7 @@ export default function Dashboard() {
                                         <input className='bg-gray-50 outline-none ml-1 block ' type='text' name='' id='' placeholder='search...' />
                                     </div> */}
                                     <div className='lg:ml-40 ml-10 space-x-8'>
-                                        <Link to='/admin/transaction' className='flex items-center justify-center bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'><FaCartPlus className='mr-2' /> Tambah Transaksi</Link>
+                                        <Link to='/cashier/transaction' className='flex items-center justify-center bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'><FaCartPlus className='mr-2' /> Tambah Transaksi</Link>
                                     </div>
                                 </div>
                             </div>
