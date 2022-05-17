@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { AiOutlineClose } from 'react-icons/ai'
 import { FaHome, FaBuilding, FaBox, FaUserAlt, FaShoppingCart, FaSignOutAlt } from 'react-icons/fa'
 
