@@ -144,7 +144,7 @@ export default function Dashboard() {
                                     </div>
                                     <div className='text-right'>
                                         <p className='text-2xl'>{dataTransaction.length}</p>
-                                        <p>Total Traksaksi</p>
+                                        <p>Total Transaksi</p>
                                     </div>
                                 </div>
                                 <div className='bg-sky-500 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-white text-white font-medium group'>
