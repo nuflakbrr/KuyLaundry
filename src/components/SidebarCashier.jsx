@@ -27,7 +27,7 @@ export default function SidebarCashier() {
     const primaryLinks = [
         { path: '/cashier/dashboard', name: 'Dashboard Kasir', icon: <FaHome className='mr-2 text-lg' /> },
         { path: '/cashier/member', name: 'Pelanggan', icon: <FaUserAlt className='mr-2 text-lg' /> },
-        { path: '/cashier/transaction', name: 'Transaksi', icon: <FaShoppingCart className='mr-2 text-lg' /> },
+        { path: '/cashier/transaction/add', name: 'Transaksi', icon: <FaShoppingCart className='mr-2 text-lg' /> },
     ]
 
     // Block Access if Login Role is not Cashier

@@ -29,7 +29,7 @@ export default function SidebarAdmin() {
         { path: '/admin/outlet', name: 'Outlet', icon: <FaBuilding className='mr-2 text-lg' /> },
         { path: '/admin/package', name: 'Produk', icon: <FaBox className='mr-2 text-lg' /> },
         { path: '/admin/member', name: 'Pelanggan', icon: <FaUserAlt className='mr-2 text-lg' /> },
-        { path: '/admin/transaction', name: 'Transaksi', icon: <FaShoppingCart className='mr-2 text-lg' /> },
+        { path: '/admin/transaction/add', name: 'Transaksi', icon: <FaShoppingCart className='mr-2 text-lg' /> },
     ]
 
     // Block Access if Login Role is not Admin

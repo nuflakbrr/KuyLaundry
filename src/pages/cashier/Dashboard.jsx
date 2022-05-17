@@ -168,7 +168,7 @@ export default function Dashboard() {
                                 </div>
                                 <div className='flex flex-wrap items-center justify-between'>
                                     <div className='lg:ml-40 ml-10 space-x-8'>
-                                        <Link to='/cashier/transaction' className='flex items-center justify-center bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'><FaCartPlus className='mr-2' /> Tambah Transaksi</Link>
+                                        <Link to='/cashier/transaction/add' className='flex items-center justify-center bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'><FaCartPlus className='mr-2' /> Tambah Transaksi</Link>
                                     </div>
                                 </div>
                             </div>
