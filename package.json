@@ -16,6 +16,7 @@
     "react-hook-form": "^7.31.1",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",
+    "react-to-pdf": "^0.0.14",
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
