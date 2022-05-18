@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { FaCartPlus, FaUndoAlt } from 'react-icons/fa'
+import { FaCartPlus } from 'react-icons/fa'
 
 import axios from '../../config/axios'
 import cookies from '../../config/cookie'
