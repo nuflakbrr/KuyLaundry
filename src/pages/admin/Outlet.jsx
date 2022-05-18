@@ -19,8 +19,8 @@ export default function Outlet() {
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
     // GET All Data Outlet from API
-    useEffect(() => {
-        axios.get('/outlet', { headers: headerConfig })
+    useEffect(async () => {
+        await axios.get('/outlet', { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })

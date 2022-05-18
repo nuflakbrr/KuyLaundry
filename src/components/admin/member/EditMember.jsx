@@ -23,8 +23,8 @@ export default function EditMember() {
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
     // GET Data Member from Params
-    useEffect(() => {
-        axios.get(`/member/${id}`, { headers: headerConfig })
+    useEffect(async () => {
+        await axios.get(`/member/${id}`, { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })
@@ -60,9 +60,9 @@ export default function EditMember() {
     }
 
     // DELETE Data Member
-    const dropMember = () => {
+    const dropMember = async () => {
         if (window.confirm('Apakah Anda yakin menghapus data ini?')) {
-            axios.delete(`/member/${id}`, { headers: headerConfig })
+            await axios.delete(`/member/${id}`, { headers: headerConfig })
                 .then(res => {
                     alert(res.data.message)
                     window.location.href = '/admin/member'

@@ -19,8 +19,8 @@ export default function User() {
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
     // GET All Data User from API
-    useEffect(() => {
-        axios.get('/admin', { headers: headerConfig })
+    useEffect(async () => {
+        await axios.get('/admin', { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })

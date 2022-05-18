@@ -23,8 +23,8 @@ export default function Dashboard() {
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
     // Get All Data Outlet from API
-    useEffect(() => {
-        axios.get('/outlet', { headers: headerConfig })
+    useEffect(async () => {
+        await axios.get('/outlet', { headers: headerConfig })
             .then(res => {
                 setDataOutlet(res.data.data)
             })
@@ -34,8 +34,8 @@ export default function Dashboard() {
     }, [])
 
     // Get All Data Member from API
-    useEffect(() => {
-        axios.get('/member', { headers: headerConfig })
+    useEffect(async () => {
+        await axios.get('/member', { headers: headerConfig })
             .then(res => {
                 setDataMember(res.data.data)
             })
@@ -45,8 +45,8 @@ export default function Dashboard() {
     }, [])
 
     // Get All Data Transaction from API
-    useEffect(() => {
-        axios.get('/transaction', { headers: headerConfig })
+    useEffect(async () => {
+        await axios.get('/transaction', { headers: headerConfig })
             .then(res => {
                 setDataTransaction(res.data.data)
             })
@@ -56,8 +56,8 @@ export default function Dashboard() {
     }, [])
 
     // Get All Data User from API
-    useEffect(() => {
-        axios.get('/admin', { headers: headerConfig })
+    useEffect(async () => {
+        await axios.get('/admin', { headers: headerConfig })
             .then(res => {
                 setDataUser(res.data.data)
             })
@@ -67,10 +67,10 @@ export default function Dashboard() {
     }, [])
 
     // Function to GET Member By Id
-    const getMemberById = (memberId) => {
+    const getMemberById = async (memberId) => {
         const id = dataTransaction[0].memberId
 
-        axios.get(`/member/${id}`, { headers: headerConfig })
+        await axios.get(`/member/${id}`, { headers: headerConfig })
             .then(res => {
                 setMemberName(res.data.data.name)
             })
@@ -82,10 +82,10 @@ export default function Dashboard() {
     }
 
     // Function to GET Admin By Id
-    const getAdminById = (adminId) => {
+    const getAdminById = async (adminId) => {
         const id = dataTransaction[0].adminId
 
-        axios.get(`/admin/${id}`, { headers: headerConfig })
+        await axios.get(`/admin/${id}`, { headers: headerConfig })
             .then(res => {
                 setAdminName(res.data.data.name)
             })

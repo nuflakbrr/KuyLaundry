@@ -23,8 +23,8 @@ export default function EditPackage() {
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
     // GET Data Package from Params
-    useEffect(() => {
-        axios.get(`/package/${id}`, { headers: headerConfig })
+    useEffect(async () => {
+        await axios.get(`/package/${id}`, { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })
@@ -60,9 +60,9 @@ export default function EditPackage() {
     }
 
     // DELETE Data Package
-    const dropPackage = () => {
+    const dropPackage = async () => {
         if (window.confirm('Apakah Anda yakin menghapus data ini?')) {
-            axios.delete(`/package/${id}`, { headers: headerConfig })
+            await axios.delete(`/package/${id}`, { headers: headerConfig })
                 .then(res => {
                     alert(res.data.message)
                     window.location.href = '/admin/package'

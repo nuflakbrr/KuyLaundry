@@ -23,8 +23,8 @@ export default function EditAdmin() {
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
     // GET Data Admin from Params
-    useEffect(() => {
-        axios.get(`/admin/${id}`, { headers: headerConfig })
+    useEffect(async () => {
+        await axios.get(`/admin/${id}`, { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })
@@ -67,9 +67,9 @@ export default function EditAdmin() {
     }
 
     // DELETE Data Admin
-    const dropAdmin = () => {
+    const dropAdmin = async () => {
         if (window.confirm('Apakah Anda yakin menghapus data ini?')) {
-            axios.delete(`/admin/${id}`, { headers: headerConfig })
+            await axios.delete(`/admin/${id}`, { headers: headerConfig })
                 .then(res => {
                     alert(res.data.message)
                     window.location.href = '/admin/user'

@@ -23,8 +23,8 @@ export default function EditOutlet() {
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
     // GET Data Outlet from Params
-    useEffect(() => {
-        axios.get(`/outlet/${id}`, { headers: headerConfig })
+    useEffect(async () => {
+        await axios.get(`/outlet/${id}`, { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })
@@ -61,9 +61,9 @@ export default function EditOutlet() {
     }
 
     // DELETE Data Outlet
-    const dropOutlet = () => {
+    const dropOutlet = async () => {
         if (window.confirm('Apakah Anda yakin menghapus data ini?')) {
-            axios.delete(`/outlet/${id}`, { headers: headerConfig })
+            await axios.delete(`/outlet/${id}`, { headers: headerConfig })
                 .then(res => {
                     alert(res.data.message)
                     window.location.href = '/admin/outlet'
