@@ -80,7 +80,7 @@ export default function EditPackage() {
                 <div className='max-w-xl mx-auto py-12 px-4 sm:px-6 lg:px-8'>
                     <div className='container bg-white rounded p-5'>
                         <div className='text-center'>
-                            <h1 className='font-bold text-xl'>Ubah Pelanggan</h1>
+                            <h1 className='font-bold text-xl'>Ubah Paket Jasa</h1>
                         </div>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             {isUpdatePackageError && (
