@@ -23,8 +23,8 @@ export default function Dashboard() {
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
     // Get All Data Outlet from API
-    useEffect(async () => {
-        await axios.get('/outlet', { headers: headerConfig })
+    useEffect(() => {
+        axios.get('/outlet', { headers: headerConfig })
             .then(res => {
                 setDataOutlet(res.data.data)
             })
@@ -34,8 +34,8 @@ export default function Dashboard() {
     }, [])
 
     // Get All Data Member from API
-    useEffect(async () => {
-        await axios.get('/member', { headers: headerConfig })
+    useEffect(() => {
+        axios.get('/member', { headers: headerConfig })
             .then(res => {
                 setDataMember(res.data.data)
             })
@@ -45,8 +45,8 @@ export default function Dashboard() {
     }, [])
 
     // Get All Data Transaction from API
-    useEffect(async () => {
-        await axios.get('/transaction', { headers: headerConfig })
+    useEffect(() => {
+        axios.get('/transaction', { headers: headerConfig })
             .then(res => {
                 setDataTransaction(res.data.data)
             })
@@ -56,8 +56,8 @@ export default function Dashboard() {
     }, [])
 
     // Get All Data User from API
-    useEffect(async () => {
-        await axios.get('/admin', { headers: headerConfig })
+    useEffect(() => {
+        axios.get('/admin', { headers: headerConfig })
             .then(res => {
                 setDataUser(res.data.data)
             })

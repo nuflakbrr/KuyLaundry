@@ -23,8 +23,8 @@ export default function EditOutlet() {
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
     // GET Data Outlet from Params
-    useEffect(async () => {
-        await axios.get(`/outlet/${id}`, { headers: headerConfig })
+    useEffect(() => {
+        axios.get(`/outlet/${id}`, { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })

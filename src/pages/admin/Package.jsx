@@ -19,8 +19,8 @@ export default function Package() {
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
     // GET All Data Package from API
-    useEffect(async () => {
-        await axios.get('/package', { headers: headerConfig })
+    useEffect(() => {
+        axios.get('/package', { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })

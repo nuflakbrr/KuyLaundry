@@ -23,8 +23,8 @@ export default function EditAdmin() {
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
     // GET Data Admin from Params
-    useEffect(async () => {
-        await axios.get(`/admin/${id}`, { headers: headerConfig })
+    useEffect(() => {
+        axios.get(`/admin/${id}`, { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })

@@ -23,8 +23,8 @@ export default function EditPackage() {
     let headerConfig = { Authorization: `Bearer ${cookie}` }
 
     // GET Data Package from Params
-    useEffect(async () => {
-        await axios.get(`/package/${id}`, { headers: headerConfig })
+    useEffect(() => {
+        axios.get(`/package/${id}`, { headers: headerConfig })
             .then(res => {
                 setData(res.data.data)
             })
