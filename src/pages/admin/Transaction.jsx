@@ -61,40 +61,71 @@ export default function Transaction() {
 
     // POST Data From New Transaction Form
     const onSubmit = async (data) => {
-        // const bodyTransaction = {
-        //     memberId: data.memberId,
-        //     date: data.date,
-        //     deadline: data.deadline,
-        //     datePayment: data.datePayment,
-        //     statusPayment: data.statusPayment,
-        //     status: data.status,
-        //     adminId: data.adminId,
-        // }
+        const bodyTransaction = {
+            memberId: data.memberId,
+            date: data.date,
+            deadline: data.deadline,
+            datePayment: data.datePayment,
+            statusPayment: data.statusPayment,
+            status: data.status,
+            adminId: data.adminId,
+        }
 
-        // const bodyTransactionDetail = {
-        //     transactionId: data.transactionId,
-        //     packageId: data.packageId,
-        //     quantity: data.quantity,
-        // }
+        try {
+            await axios.post('/transaction', bodyTransaction, { headers: headerConfig })
+                .then(res => {
+                    if (res.data.message === 'Transaction created successfully') {
+                        const transactionId = res.data.data._id
+                        console.log(transactionId)
 
-        // const getIdTransactionById = await axios.get(`/transaction/`, { headers: headerConfig })
+                        // memasukkan data ke detail transaksi namun bisa lebih dari satu packageId (array)
+                        for (let i = 0; i < data.quantity.length; i++) {
+                            const bodyDetailTransaction = {
+                                transactionId: transactionId,
+                                packageId: data.packageId[i],
+                                quantity: data.quantity[i],
+                            }
+                            axios.post('/transaction-detail', bodyDetailTransaction, { headers: headerConfig })
+                                .then(res => {
+                                    console.log(res.data.message)
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                })
+                        }
 
-        // try {
-        //     const response = await axios.post('/transaction', bodyTransaction, { headers: headerConfig })
-        //     const responseDetail = await axios.post('/transaction-detail', bodyTransactionDetail, { headers: headerConfig })
+                        setIsRegisterSuccess(true)
 
-        //     if (response.data.message === 'Transaction not found') {
-        //         console.log(response.data.message)
-        //         throw new Error(response.data.message)
-        //     } else if (response.data.message === 'Transaction created successfully') {
-        //         // setIsRegisterSuccess(true)
-        //         // setTimeout(() => {
-        //         //     window.location.href = '/admin/transaction'
-        //         // }, 1500)
-        //     }
-        // } catch (error) {
-        //     setIsRegisterError(true)
-        // }
+
+                        // for (let i = 0; i < data.quantity.length; i++) {
+                        //     const bodyTransactionDetail = {
+                        //         transactionId: transactionId,
+                        //         packageId: data.packageId[i],
+                        //         quantity: data.quantity[i],
+                        //     }
+                        // }
+
+                        // axios.post('/transaction-detail', bodyTransactionDetail, { headers: headerConfig })
+                        //     .then(res => {
+                        //         if (res.data.message === 'Transaction detail created successfully') {
+                        //             setIsRegisterSuccess(true)
+                        //             setTimeout(() => {
+                        //                 window.location.href = '/admin/transaction'
+                        //             }, 1500)
+                        //         }
+                        //     })
+                        //     .catch(err => {
+                        //         console.log(err)
+                        //     })
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+
+        } catch (error) {
+            setIsRegisterError(true)
+        }
     }
 
     return (
@@ -187,7 +218,7 @@ export default function Transaction() {
                                                     <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='packageId'>
                                                         Paket Jasa #{index + 1}
                                                     </label>
-                                                    <select className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='packageId' name='packageId' {...register('packageId', { required: true })}>
+                                                    <select className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='packageId[]' name='packageId[]' {...register('packageId[]', { required: true })}>
                                                         <option defaultValue disabled>Pilih Nama Paket Jasa</option>
                                                         {dataPackage.map((item, index) => {
                                                             return (
@@ -201,7 +232,7 @@ export default function Transaction() {
                                                         Kuantitas
                                                     </label>
                                                     <div className='flex items-center justify-center'>
-                                                        <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline' id='quantity' type='number' placeholder='Kuantitas' {...register('quantity', { required: true })} />
+                                                        <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline' id='quantity[]' name='quantity[]' type='number' placeholder='Kuantitas' {...register('quantity[]', { required: true })} />
                                                         <span className='mx-2 text-lg'>Kg</span>
                                                     </div>
                                                 </div>
