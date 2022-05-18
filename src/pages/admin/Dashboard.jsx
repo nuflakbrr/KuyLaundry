@@ -204,6 +204,14 @@ export default function Dashboard() {
                                                     </th>
                                                     <th
                                                         className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                        Paket Jasa
+                                                    </th>
+                                                    <th
+                                                        className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                        Total Harga
+                                                    </th>
+                                                    <th
+                                                        className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
                                                         Status Pengerjaan
                                                     </th>
                                                     <th
@@ -273,6 +281,19 @@ export default function Dashboard() {
                                                                             Lunas
                                                                         </p>
                                                                     )}
+                                                                </div>
+                                                            </td>
+                                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                <div className='flex items-center'>
+                                                                    <p className='text-gray-900 whitespace-no-wrap'>
+
+                                                                    </p>
+                                                                </div>
+                                                            </td><td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                <div className='flex items-center'>
+                                                                    <p className='text-gray-900 whitespace-no-wrap'>
+
+                                                                    </p>
                                                                 </div>
                                                             </td>
                                                             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
