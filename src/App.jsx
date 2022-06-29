@@ -19,6 +19,9 @@ import { AddMember as AddMemberCashier, EditMember as EditMemberCashier } from '
 // User
 import { EditAdmin, Register } from './components/admin/user'
 
+// Transaction
+import { EditTransaction } from './components/admin/transaction'
+
 
 function App() {
   return (
@@ -43,6 +46,7 @@ function App() {
       <Route path='/admin/member/edit/*' element={<EditMember />} />
 
       <Route path='/admin/transaction/add' element={<Transaction />} />
+      <Route path='/admin/transaction/edit/*' element={<EditTransaction />} />
 
       <Route path='/admin/user' element={<User />} />
       <Route path='/admin/user/add' element={<Register />} />
