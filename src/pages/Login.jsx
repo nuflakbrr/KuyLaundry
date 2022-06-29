@@ -22,7 +22,6 @@ export default function Login() {
                 throw new Error(res.data.message)
             } else if (response.data) {
                 cookie.createCookie(response.data.token)
-                console.log(response.data)
 
                 if (response.data.user.role === 'admin') {
                     setIsLoginSuccess(true)
