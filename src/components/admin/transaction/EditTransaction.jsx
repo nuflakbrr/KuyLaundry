@@ -25,25 +25,31 @@ export default function EditTransaction() {
 
     // GET Data Transaction from Params
     useEffect(() => {
-        axios.get(`/transaction/${id}`, { headers: headerConfig })
-            .then(res => {
-                setData(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
+        // Transaction
+        const getDataTransaction = async () => {
+            await axios.get(`/transaction/${id}`, { headers: headerConfig })
+                .then(res => {
+                    setData(res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
 
-    // GET Data Transaction Detail from Params
-    useEffect(() => {
-        axios.get(`/transaction-detail/${id}`, { headers: headerConfig })
-            .then(res => {
-                setDataDetail(res.data.data[0])
-                console.log(res.data.data[0])
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        // Transaction Detail
+        const getDataTransactionDetail = async () => {
+            await axios.get(`/transaction-detail/${id}`, { headers: headerConfig })
+                .then(res => {
+                    setDataDetail(res.data.data[0])
+                    console.log(res.data.data[0])
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+        getDataTransaction()
+        getDataTransactionDetail()
     }, [])
 
     // Function Format Date from API
@@ -107,19 +113,6 @@ export default function EditTransaction() {
                         window.location.href = '/admin/dashboard'
                     }, 1500)
                 }
-
-                // if (res.data.message === 'Transaction deleted successfully') {
-                //     axios.delete(`/transaction-detail/${id}`, { headers: headerConfig })
-                //         .then(res => {
-                //             alert(res.data.message)
-                //             setTimeout(() => {
-                //                 window.location.href = '/admin/dashboard'
-                //             }, 1500)
-                //         })
-                //         .catch(err => {
-                //             console.log(err)
-                //         })
-                // }
             } catch (error) {
                 setIsUpdateTransactionError(true)
             }
