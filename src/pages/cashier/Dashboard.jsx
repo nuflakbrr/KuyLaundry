@@ -13,9 +13,6 @@ export default function Dashboard() {
     const [dataTransaction, setDataTransaction] = useState([])
     const [dataUser, setDataUser] = useState([])
 
-    const [memberName, setMemberName] = useState('')
-    const [adminName, setAdminName] = useState('')
-
     // Get Data from Cookie
     const cookie = cookies.getCookies()
 
@@ -24,76 +21,85 @@ export default function Dashboard() {
 
     // Get All Data Outlet from API
     useEffect(() => {
-        axios.get('/outlet', { headers: headerConfig })
-            .then(res => {
-                setDataOutlet(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        // Outlet
+        const getDataOutlet = async () => {
+            await axios.get('/outlet', { headers: headerConfig })
+                .then(res => {
+                    setDataOutlet(res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+        // Member
+        const getDataMember = async () => {
+            await axios.get('/member', { headers: headerConfig })
+                .then(res => {
+                    setDataMember(res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+        // Transaction
+        const getDataTransaction = async () => {
+            await axios.get('/transaction', { headers: headerConfig })
+                .then(res => {
+                    setDataTransaction(res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+        // User
+        const getDataUser = async () => {
+            await axios.get('/admin', { headers: headerConfig })
+                .then(res => {
+                    setDataUser(res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+        getDataOutlet()
+        getDataMember()
+        getDataTransaction()
+        getDataUser()
     }, [])
 
-    // Get All Data Member from API
-    useEffect(() => {
-        axios.get('/member', { headers: headerConfig })
-            .then(res => {
-                setDataMember(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
-
-    // Get All Data Transaction from API
-    useEffect(() => {
-        axios.get('/transaction', { headers: headerConfig })
-            .then(res => {
-                setDataTransaction(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
-
-    // Get All Data User from API
-    useEffect(() => {
-        axios.get('/admin', { headers: headerConfig })
-            .then(res => {
-                setDataUser(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
-
-    // Function to GET Member By Id
-    const getMemberById = async (memberId) => {
-        const id = dataTransaction[0].memberId
-
-        await axios.get(`/member/${id}`, { headers: headerConfig })
-            .then(res => {
-                setMemberName(res.data.data.name)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-
-        return memberName
+    // Function Format Member Name from id
+    const formatMemberName = (id) => {
+        const member = dataMember.find(member => member._id === id)
+        return member.name
     }
 
-    // Function to GET Admin By Id
-    const getAdminById = async (adminId) => {
-        const id = dataTransaction[0].adminId
+    // Function Format User Name from id
+    const formatUserName = (id) => {
+        const user = dataUser.find(user => user._id === id)
+        return user.name
+    }
 
-        await axios.get(`/admin/${id}`, { headers: headerConfig })
-            .then(res => {
-                setAdminName(res.data.data.name)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+    // Function Get Status Payment String
+    const getStatusPayment = (status) => {
+        switch (status) {
+            case "unpaid": return <p className='bg-red-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Belum Lunas</p>
+            case "paid": return <p className='bg-green-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Lunas</p>
+            default: return <p className='bg-blue-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Belum Terkonfirmasi</p>
+        }
+    }
 
-        return adminName
+    // Function Get Status Transaction String
+    const getStatusTransaction = (status) => {
+        switch (status) {
+            case "pending": return <p className='bg-yellow-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Proses</p>
+            case "done": return <p className='bg-green-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Selesai</p>
+            case "canceled": return <p className='bg-red-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Dibatalkan</p>
+            default: return <p className='bg-blue-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Mengantri</p>
+        }
     }
 
     // Function Format Date from API
@@ -236,7 +242,7 @@ export default function Dashboard() {
                                                                     </div>
                                                                     <div className='ml-3'>
                                                                         <p className='text-gray-900 whitespace-no-wrap'>
-                                                                            {getMemberById(val.memberId)}
+                                                                            {formatMemberName(val.memberId)}
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -264,36 +270,12 @@ export default function Dashboard() {
                                                             </td>
                                                             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                                                                 <div className='flex items-center'>
-                                                                    {val.statusPayment === 'unpaid' ? (
-                                                                        <p className='bg-red-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>
-                                                                            Belum Lunas
-                                                                        </p>
-                                                                    ) : (
-                                                                        <p className='bg-green-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>
-                                                                            Lunas
-                                                                        </p>
-                                                                    )}
+                                                                    {getStatusPayment(val.statusPayment)}
                                                                 </div>
                                                             </td>
                                                             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                                                                 <div className='flex items-center'>
-                                                                    {val.status === 'pending' ? (
-                                                                        <p className='bg-yellow-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>
-                                                                            Proses
-                                                                        </p>
-                                                                    ) : val.status === 'done' ? (
-                                                                        <p className='bg-green-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>
-                                                                            Selesai
-                                                                        </p>
-                                                                    ) : val.status === 'canceled' ? (
-                                                                        <p className='bg-red-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>
-                                                                            Dibatalkan
-                                                                        </p>
-                                                                    ) : (
-                                                                        <p className='bg-blue-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>
-                                                                            Mengantri
-                                                                        </p>
-                                                                    )}
+                                                                    {getStatusTransaction(val.status)}
                                                                 </div>
                                                             </td>
                                                             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
@@ -305,7 +287,7 @@ export default function Dashboard() {
                                                                     </div>
                                                                     <div className='ml-3'>
                                                                         <p className='text-gray-900 whitespace-no-wrap'>
-                                                                            {getAdminById(val.adminId)}
+                                                                            {formatUserName(val.adminId)}
                                                                         </p>
                                                                     </div>
                                                                 </div>
