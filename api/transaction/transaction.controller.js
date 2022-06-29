@@ -1,6 +1,8 @@
+const ObjectId = require('mongoose').Types.ObjectId
 const asyncHandler = require('express-async-handler')
 
 const Transaction = require('./transaction.model')
+const DetailTransaction = require('../transactionDetail/detail.model')
 
 // @description     GET All Transaction Data
 // @routes          GET /api/transaction/
@@ -81,7 +83,7 @@ const putTransaction = asyncHandler(async (req, res) => {
 
     const checkIfTransactionExist = await Transaction.findById(req.params.id)
 
-    if (!req.body.memberId || !req.body.date || !req.body.deadline || !req.body.datePayment || !req.body.statusPayment || !req.body.status || !req.body.adminId) {
+    if (!req.body.datePayment || !req.body.statusPayment || !req.body.status) {
         return res.status(400).json({
             success: 0,
             message: 'Please provide all required fields'
@@ -116,6 +118,7 @@ const deleteTransaction = asyncHandler(async (req, res) => {
     }
 
     await delTransaction.remove()
+    await DetailTransaction.deleteMany({ transactionId: ObjectId(req.params.id) })
 
     res.status(200).json({
         success: 1,

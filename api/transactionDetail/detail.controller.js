@@ -19,7 +19,7 @@ const getDetailTransaction = asyncHandler(async (req, res) => {
 // @routes          GET /api/transaction-detail/:id
 // @access          Private
 const getDetailTransactionById = asyncHandler(async (req, res) => {
-    const detailTransactionById = await DetailTransaction.findById(req.params.id)
+    const detailTransactionById = await DetailTransaction.find({ transactionId: req.params.id })
 
     if (!detailTransactionById) {
         return res.status(404).json({
@@ -98,7 +98,7 @@ const putDetailTransaction = asyncHandler(async (req, res) => {
 // @routes          DELETE /api/transaction-detail/:id
 // @access          Private
 const deleteDetailTransaction = asyncHandler(async (req, res) => {
-    const delDetailTransaction = await DetailTransaction.findById(req.params.id)
+    const delDetailTransaction = await DetailTransaction.find({ transactionId: req.params.id })
 
     if (!delDetailTransaction) {
         return res.status(404).json({
