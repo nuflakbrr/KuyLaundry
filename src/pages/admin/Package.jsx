@@ -20,13 +20,17 @@ export default function Package() {
 
     // GET All Data Package from API
     useEffect(() => {
-        axios.get('/package', { headers: headerConfig })
-            .then(res => {
-                setData(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        const getData = async () => {
+            await axios.get('/package', { headers: headerConfig })
+                .then(res => {
+                    setData(res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+        getData()
     }, [])
 
     // Search Event

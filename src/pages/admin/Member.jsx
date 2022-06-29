@@ -20,20 +20,32 @@ export default function Member() {
 
     // GET All Data Member from API
     useEffect(() => {
-        axios.get('/member', { headers: headerConfig })
-            .then(res => {
-                setData(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        const getData = async () => {
+            await axios.get('/member', { headers: headerConfig })
+                .then(res => {
+                    setData(res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+        getData()
     }, [])
+
+    // Function Get Gender String
+    const getGender = (gender) => {
+        switch (gender) {
+            case "male": return "Laki-Laki"
+            default: return "Perempuan"
+        }
+    }
 
     // Search Event
     function searchItems(searched) {
         setSearch(searched)
         setFilteredResults(data.filter(item => {
-            return item.name.toLowerCase().includes(searched.toLowerCase()) || item.address.toLowerCase().includes(searched.toLowerCase()) || item.gender.toLowerCase().includes(searched.toLowerCase()) || item.phone.toLowerCase().includes(searched.toLowerCase())
+            return item.name.toLowerCase().includes(searched.toLowerCase()) || item.address.toLowerCase().includes(searched.toLowerCase()) || item.phone.toLowerCase().includes(searched.toLowerCase())
         }))
     }
 
@@ -150,7 +162,7 @@ export default function Member() {
                                                         </td>
                                                         <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                                                             <div className='flex items-center'>
-                                                                {val.gender}
+                                                                {getGender(val.gender)}
                                                             </div>
                                                         </td>
                                                         <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
@@ -206,7 +218,7 @@ export default function Member() {
                                                             </td>
                                                             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                                                                 <div className='flex items-center'>
-                                                                    {val.gender}
+                                                                    {getGender(val.gender)}
                                                                 </div>
                                                             </td>
                                                             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>

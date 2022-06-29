@@ -28,35 +28,42 @@ export default function Transaction() {
 
     // GET Data Member
     useEffect(() => {
-        axios.get('/member', { headers: headerConfig })
-            .then(res => {
-                setDataMember(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
+        // Member
+        const getDataMember = async () => {
+            await axios.get('/member', { headers: headerConfig })
+                .then(res => {
+                    setDataMember(res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
 
-    // GET Data Package
-    useEffect(() => {
-        axios.get('/package', { headers: headerConfig })
-            .then(res => {
-                setDataPackage(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
+        // Package
+        const getDataPackage = async () => {
+            axios.get('/package', { headers: headerConfig })
+                .then(res => {
+                    setDataPackage(res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
 
-    // GET Data Admin
-    useEffect(() => {
-        axios.get('/admin', { headers: headerConfig })
-            .then(res => {
-                setDataAdmin(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        // Admin
+        const getDataAdmin = async () => {
+            axios.get('/admin', { headers: headerConfig })
+                .then(res => {
+                    setDataAdmin(res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+        getDataMember()
+        getDataPackage()
+        getDataAdmin()
     }, [])
 
     // POST Data From New Transaction Form
@@ -76,53 +83,27 @@ export default function Transaction() {
                 .then(res => {
                     if (res.data.message === 'Transaction created successfully') {
                         const transactionId = res.data.data._id
-                        console.log(transactionId)
-
-                        // memasukkan data ke detail transaksi namun bisa lebih dari satu packageId (array)
-                        for (let i = 0; i < data.quantity.length; i++) {
-                            const bodyDetailTransaction = {
-                                transactionId: transactionId,
-                                packageId: data.packageId[i],
-                                quantity: data.quantity[i],
-                            }
-                            axios.post('/transaction-detail', bodyDetailTransaction, { headers: headerConfig })
-                                .then(res => {
-                                    console.log(res.data.message)
-                                })
-                                .catch(err => {
-                                    console.log(err)
-                                })
+                        const bodyDetailTransaction = {
+                            transactionId: transactionId,
+                            packageId: data.packageId,
+                            quantity: data.quantity,
                         }
 
-                        setIsRegisterSuccess(true)
-
-
-                        // for (let i = 0; i < data.quantity.length; i++) {
-                        //     const bodyTransactionDetail = {
-                        //         transactionId: transactionId,
-                        //         packageId: data.packageId[i],
-                        //         quantity: data.quantity[i],
-                        //     }
-                        // }
-
-                        // axios.post('/transaction-detail', bodyTransactionDetail, { headers: headerConfig })
-                        //     .then(res => {
-                        //         if (res.data.message === 'Transaction detail created successfully') {
-                        //             setIsRegisterSuccess(true)
-                        //             setTimeout(() => {
-                        //                 window.location.href = '/admin/transaction'
-                        //             }, 1500)
-                        //         }
-                        //     })
-                        //     .catch(err => {
-                        //         console.log(err)
-                        //     })
+                        axios.post('/transaction-detail', bodyDetailTransaction, { headers: headerConfig })
+                            .then(res => {
+                                setIsRegisterSuccess(true)
+                                setTimeout(() => {
+                                    window.location.href = '/admin/dashboard'
+                                }, 1500)
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
                     }
                 })
                 .catch(err => {
                     console.log(err)
                 })
-
         } catch (error) {
             setIsRegisterError(true)
         }
@@ -203,7 +184,6 @@ export default function Transaction() {
                                 </label>
                                 <select className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='status' name='status' {...register('status', { required: true })}>
                                     <option defaultValue disabled>Pilih Status Pengerjaan</option>
-                                    <option value=''>Mengantri</option>
                                     <option value='pending'>Proses</option>
                                     <option value='done'>Selesai</option>
                                     <option value='canceled'>Dibatalkan</option>
@@ -218,7 +198,7 @@ export default function Transaction() {
                                                     <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='packageId'>
                                                         Paket Jasa #{index + 1}
                                                     </label>
-                                                    <select className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='packageId[]' name='packageId[]' {...register('packageId[]', { required: true })}>
+                                                    <select className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='packageId' name='packageId' {...register('packageId', { required: true })}>
                                                         <option defaultValue disabled>Pilih Nama Paket Jasa</option>
                                                         {dataPackage.map((item, index) => {
                                                             return (
@@ -232,7 +212,7 @@ export default function Transaction() {
                                                         Kuantitas
                                                     </label>
                                                     <div className='flex items-center justify-center'>
-                                                        <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline' id='quantity[]' name='quantity[]' type='number' placeholder='Kuantitas' {...register('quantity[]', { required: true })} />
+                                                        <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline' id='quantity' name='quantity' type='number' placeholder='Kuantitas' {...register('quantity', { required: true })} />
                                                         <span className='mx-2 text-lg'>Kg</span>
                                                     </div>
                                                 </div>
@@ -241,28 +221,6 @@ export default function Transaction() {
                                     })
                                 )
                             }
-                            {/* <div className='mt-4'>
-                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='packageId'>
-                                    Paket Jasa
-                                </label>
-                                <select className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='packageId' name='packageId' {...register('packageId', { required: true })}>
-                                    <option defaultValue disabled>Pilih Paket Jasa</option>
-                                    {dataPackage.map((item, index) => {
-                                        return (
-                                            <option key={index} value={item._id}>{item.name}</option>
-                                        )
-                                    })}
-                                </select>
-                            </div>
-                            <div className='mt-4'>
-                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='quantity'>
-                                    Kuantitas
-                                </label>
-                                <div className='flex items-center justify-center'>
-                                    <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline' id='quantity' type='number' placeholder='Kuantitas' {...register('quantity', { required: true })} />
-                                    <span className='mx-2 text-lg'>Kg</span>
-                                </div>
-                            </div> */}
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='adminId'>
                                     Petugas

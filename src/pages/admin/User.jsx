@@ -20,13 +20,17 @@ export default function User() {
 
     // GET All Data User from API
     useEffect(() => {
-        axios.get('/admin', { headers: headerConfig })
-            .then(res => {
-                setData(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        const getData = async () => {
+            await axios.get('/admin', { headers: headerConfig })
+                .then(res => {
+                    setData(res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+        getData()
     }, [])
 
     // Search Event

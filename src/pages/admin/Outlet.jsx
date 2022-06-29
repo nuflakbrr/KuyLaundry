@@ -20,13 +20,17 @@ export default function Outlet() {
 
     // GET All Data Outlet from API
     useEffect(() => {
-        axios.get('/outlet', { headers: headerConfig })
-            .then(res => {
-                setData(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        const getData = async () => {
+            await axios.get('/outlet', { headers: headerConfig })
+                .then(res => {
+                    setData(res.data.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+        getData()
     }, [])
 
     // Search Event
