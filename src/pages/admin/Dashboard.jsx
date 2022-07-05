@@ -297,7 +297,7 @@ export default function Dashboard() {
                                                                             <div className='flex-shrink-0 w-10 h-10'>
                                                                                 <img className='w-full h-full rounded-full'
                                                                                     src='https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg'
-                                                                                    alt='Member Profile Picture' />
+                                                                                    alt='Admin Profile Picture' />
                                                                             </div>
                                                                             <div className='ml-3'>
                                                                                 <p className='text-gray-900 whitespace-no-wrap'>

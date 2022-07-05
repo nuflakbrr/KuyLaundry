@@ -68,81 +68,49 @@ export default function Package() {
                     <div>
                         <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
                             <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
-                                <table className='min-w-full leading-normal'>
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                No
-                                            </th>
-                                            <th
-                                                className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                Id Paket Jasa
-                                            </th>
-                                            <th
-                                                className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                Nama
-                                            </th>
-                                            <th
-                                                className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                Harga
-                                            </th>
-                                            <th
-                                                className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                Aksi
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            search.length > 1 && filteredResults.length === 0 && (
-                                                <tr>
-                                                    <td colSpan='6' className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                        <p className='text-gray-900 text-center'>
-                                                            Maaf, data yang anda cari tidak dapat ditemukan.
-                                                        </p>
-                                                    </td>
-                                                </tr>
-                                            )
-                                        }
-                                        {
-                                            search.length > 1 ? (
-                                                filteredResults.map((val, index) => (
-                                                    <tr key={index}>
-                                                        <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                            <div className='flex items-center'>
-                                                                <p className='text-gray-900 whitespace-no-wrap'>
-                                                                    {index + 1}
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                            <div className='flex items-center'>
-                                                                <p className='text-gray-900 whitespace-no-wrap'>
-                                                                    {val._id}
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                            <div className='flex items-center'>
-                                                                {val.name}
-                                                            </div>
-                                                        </td>
-                                                        <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                            <div className='flex items-center'>
-                                                                <p className='text-gray-900 whitespace-no-wrap'>
-                                                                    Rp {val.price}
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                            <Link to={`/admin/package/edit/${val._id}`} className='flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'><FaEdit className='mr-2' /> Ubah</Link>
+                                {!data.length ? (
+                                    <p className='text-white text-center mx-auto'>Memuat Data📦...</p>
+                                ) : (
+                                    <table className='min-w-full leading-normal'>
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                    No
+                                                </th>
+                                                <th
+                                                    className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                    Id Paket Jasa
+                                                </th>
+                                                <th
+                                                    className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                    Nama
+                                                </th>
+                                                <th
+                                                    className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                    Harga
+                                                </th>
+                                                <th
+                                                    className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                    Aksi
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                search.length > 1 && filteredResults.length === 0 && (
+                                                    <tr>
+                                                        <td colSpan='6' className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                            <p className='text-gray-900 text-center'>
+                                                                Maaf, data yang anda cari tidak dapat ditemukan.
+                                                            </p>
                                                         </td>
                                                     </tr>
-                                                ))
-                                            ) : (
-                                                data.map((val, index) => {
-                                                    return (
+                                                )
+                                            }
+                                            {
+                                                search.length > 1 ? (
+                                                    filteredResults.map((val, index) => (
                                                         <tr key={index}>
                                                             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                                                                 <div className='flex items-center'>
@@ -174,12 +142,48 @@ export default function Package() {
                                                                 <Link to={`/admin/package/edit/${val._id}`} className='flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'><FaEdit className='mr-2' /> Ubah</Link>
                                                             </td>
                                                         </tr>
-                                                    )
-                                                })
-                                            )
-                                        }
-                                    </tbody>
-                                </table>
+                                                    ))
+                                                ) : (
+                                                    data.map((val, index) => {
+                                                        return (
+                                                            <tr key={index}>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <p className='text-gray-900 whitespace-no-wrap'>
+                                                                            {index + 1}
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <p className='text-gray-900 whitespace-no-wrap'>
+                                                                            {val._id}
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        {val.name}
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <p className='text-gray-900 whitespace-no-wrap'>
+                                                                            Rp {val.price}
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <Link to={`/admin/package/edit/${val._id}`} className='flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'><FaEdit className='mr-2' /> Ubah</Link>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                )
+                                            }
+                                        </tbody>
+                                    </table>
+                                )}
                             </div>
                         </div>
                     </div>
