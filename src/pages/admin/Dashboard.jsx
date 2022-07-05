@@ -216,82 +216,81 @@ export default function Dashboard() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {
-                                                        dataTransaction.map((val, index) => {
-                                                            return (
-                                                                <tr key={index}>
-                                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                        <div className='flex items-center'>
+                                                    {dataTransaction.map((val, index) => {
+                                                        return (
+                                                            <tr key={index}>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <p className='text-gray-900 whitespace-no-wrap'>
+                                                                            {index + 1}
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <div className='flex-shrink-0 w-10 h-10'>
+                                                                            <img className='w-full h-full rounded-full'
+                                                                                src='https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg'
+                                                                                alt='Member Profile Picture' />
+                                                                        </div>
+                                                                        <div className='ml-3'>
                                                                             <p className='text-gray-900 whitespace-no-wrap'>
-                                                                                {index + 1}
+                                                                                {formatMemberName(val.memberId)}
                                                                             </p>
                                                                         </div>
-                                                                    </td>
-                                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                        <div className='flex items-center'>
-                                                                            <div className='flex-shrink-0 w-10 h-10'>
-                                                                                <img className='w-full h-full rounded-full'
-                                                                                    src='https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg'
-                                                                                    alt='Member Profile Picture' />
-                                                                            </div>
-                                                                            <div className='ml-3'>
-                                                                                <p className='text-gray-900 whitespace-no-wrap'>
-                                                                                    {formatMemberName(val.memberId)}
-                                                                                </p>
-                                                                            </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <p className='text-gray-900 whitespace-no-wrap'>
+                                                                            {formatDate(val.date)}
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <p className='text-gray-900 whitespace-no-wrap'>
+                                                                            {formatDate(val.deadline)}
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <p className='text-gray-900 whitespace-no-wrap'>
+                                                                            {formatDate(val.datePayment)}
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        {getStatusPayment(val.statusPayment)}
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        {getStatusTransaction(val.status)}
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <div className='flex-shrink-0 w-10 h-10'>
+                                                                            <img className='w-full h-full rounded-full'
+                                                                                src='https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg'
+                                                                                alt='Admin Profile Picture' />
                                                                         </div>
-                                                                    </td>
-                                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                        <div className='flex items-center'>
+                                                                        <div className='ml-3'>
                                                                             <p className='text-gray-900 whitespace-no-wrap'>
-                                                                                {formatDate(val.date)}
+                                                                                {formatUserName(val.adminId)}
                                                                             </p>
                                                                         </div>
-                                                                    </td>
-                                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                        <div className='flex items-center'>
-                                                                            <p className='text-gray-900 whitespace-no-wrap'>
-                                                                                {formatDate(val.deadline)}
-                                                                            </p>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                        <div className='flex items-center'>
-                                                                            <p className='text-gray-900 whitespace-no-wrap'>
-                                                                                {formatDate(val.datePayment)}
-                                                                            </p>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                        <div className='flex items-center'>
-                                                                            {getStatusPayment(val.statusPayment)}
-                                                                        </div>
-                                                                    </td>
-                                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                        <div className='flex items-center'>
-                                                                            {getStatusTransaction(val.status)}
-                                                                        </div>
-                                                                    </td>
-                                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                        <div className='flex items-center'>
-                                                                            <div className='flex-shrink-0 w-10 h-10'>
-                                                                                <img className='w-full h-full rounded-full'
-                                                                                    src='https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg'
-                                                                                    alt='Admin Profile Picture' />
-                                                                            </div>
-                                                                            <div className='ml-3'>
-                                                                                <p className='text-gray-900 whitespace-no-wrap'>
-                                                                                    {formatUserName(val.adminId)}
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                        <Link to={`/admin/transaction/edit/${val._id}`} className='flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'><FaEdit className='mr-2' /> Ubah</Link>
-                                                                    </td>
-                                                                </tr>
-                                                            )
-                                                        })}
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <Link to={`/admin/transaction/edit/${val._id}`} className='flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'><FaEdit className='mr-2' /> Ubah</Link>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })}
                                                 </tbody>
                                             </table>
                                         )}

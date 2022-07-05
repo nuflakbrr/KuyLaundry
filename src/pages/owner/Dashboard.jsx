@@ -13,9 +13,6 @@ export default function Dashboard() {
     const [dataTransaction, setDataTransaction] = useState([])
     const [dataUser, setDataUser] = useState([])
 
-    const [memberName, setMemberName] = useState('')
-    const [adminName, setAdminName] = useState('')
-
     // Get Data from Cookie
     const cookie = cookies.getCookies()
 
@@ -24,76 +21,75 @@ export default function Dashboard() {
 
     // Get All Data Outlet from API
     useEffect(() => {
-        axios.get('/outlet', { headers: headerConfig })
-            .then(res => {
-                setDataOutlet(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        // Outlet
+        const getDataOutlet = async () => {
+            await axios.get('/outlet', { headers: headerConfig })
+                .then(res => setDataOutlet(res.data.data))
+                .catch(err => console.log(err))
+        }
+
+        // Member
+        const getDataMember = async () => {
+            await axios.get('/member', { headers: headerConfig })
+                .then(res => setDataMember(res.data.data))
+                .catch(err => console.log(err))
+        }
+
+        // Transaction
+        const getDataTransaction = async () => {
+            await axios.get('/transaction', { headers: headerConfig })
+                .then(res => setDataTransaction(res.data.data))
+                .catch(err => console.log(err))
+        }
+
+        // User
+        const getDataUser = async () => {
+            await axios.get('/admin', { headers: headerConfig })
+                .then(res => setDataUser(res.data.data))
+                .catch(err => console.log(err))
+        }
+
+        Promise.all([
+            getDataOutlet(),
+            getDataMember(),
+            getDataTransaction(),
+            getDataUser()
+        ])
     }, [])
 
-    // Get All Data Member from API
-    useEffect(() => {
-        axios.get('/member', { headers: headerConfig })
-            .then(res => {
-                setDataMember(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
+    // Function Format Member Name from id
+    const formatMemberName = (id) => {
+        if (!id) return ''
 
-    // Get All Data Transaction from API
-    useEffect(() => {
-        axios.get('/transaction', { headers: headerConfig })
-            .then(res => {
-                setDataTransaction(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
-
-    // Get All Data User from API
-    useEffect(() => {
-        axios.get('/admin', { headers: headerConfig })
-            .then(res => {
-                setDataUser(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
-
-    // Function to GET Member By Id
-    const getMemberById = async (memberId) => {
-        const id = dataTransaction[0].memberId
-
-        await axios.get(`/member/${id}`, { headers: headerConfig })
-            .then(res => {
-                setMemberName(res.data.data.name)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-
-        return memberName
+        const member = dataMember.find(member => member._id === id)
+        return member.name
     }
 
-    // Function to GET Admin By Id
-    const getAdminById = async (adminId) => {
-        const id = dataTransaction[0].adminId
+    // Function Format User Name from id
+    const formatUserName = (id) => {
+        if (!id) return ''
 
-        await axios.get(`/admin/${id}`, { headers: headerConfig })
-            .then(res => {
-                setAdminName(res.data.data.name)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        const user = dataUser.find(user => user._id === id)
+        return user.name
+    }
 
-        return adminName
+    // Function Get Status Payment String
+    const getStatusPayment = (status) => {
+        switch (status) {
+            case "unpaid": return <p className='bg-red-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Belum Lunas</p>
+            case "paid": return <p className='bg-green-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Lunas</p>
+            default: return <p className='bg-blue-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Belum Terkonfirmasi</p>
+        }
+    }
+
+    // Function Get Status Transaction String
+    const getStatusTransaction = (status) => {
+        switch (status) {
+            case "pending": return <p className='bg-yellow-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Proses</p>
+            case "done": return <p className='bg-green-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Selesai</p>
+            case "canceled": return <p className='bg-red-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Dibatalkan</p>
+            default: return <p className='bg-blue-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>Mengantri</p>
+        }
     }
 
     // Function Format Date from API
@@ -170,149 +166,129 @@ export default function Dashboard() {
                             <div>
                                 <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
                                     <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
-                                        <table className='min-w-full leading-normal'>
-                                            <thead>
-                                                <tr>
-                                                    <th
-                                                        className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                        No
-                                                    </th>
-                                                    <th
-                                                        className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                        Nama Member
-                                                    </th>
-                                                    <th
-                                                        className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                        Tanggal
-                                                    </th>
-                                                    <th
-                                                        className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                        Tanggal Selesai
-                                                    </th>
-                                                    <th
-                                                        className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                        Tanggal Bayar
-                                                    </th>
-                                                    <th
-                                                        className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                        Status Pembayaran
-                                                    </th>
-                                                    <th
-                                                        className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                        Status Pengerjaan
-                                                    </th>
-                                                    <th
-                                                        className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                        Nama Petugas
-                                                    </th>
-                                                    <th
-                                                        className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
-                                                        Aksi
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {dataTransaction.map((val, index) => {
-                                                    return (
-                                                        <tr key={index}>
-                                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                <div className='flex items-center'>
-                                                                    <p className='text-gray-900 whitespace-no-wrap'>
-                                                                        {index + 1}
-                                                                    </p>
-                                                                </div>
-                                                            </td>
-                                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                <div className='flex items-center'>
-                                                                    <div className='flex-shrink-0 w-10 h-10'>
-                                                                        <img className='w-full h-full rounded-full'
-                                                                            src='https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg'
-                                                                            alt='Member Profile Picture' />
-                                                                    </div>
-                                                                    <div className='ml-3'>
+                                        {!dataUser.length || !dataMember.length || !dataOutlet.length || !dataTransaction.length ? (
+                                            <p className='text-white text-center mx-auto'>Memuat Data📦...</p>
+                                        ) : (
+                                            <table className='min-w-full leading-normal'>
+                                                <thead>
+                                                    <tr>
+                                                        <th
+                                                            className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                            No
+                                                        </th>
+                                                        <th
+                                                            className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                            Nama Member
+                                                        </th>
+                                                        <th
+                                                            className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                            Tanggal
+                                                        </th>
+                                                        <th
+                                                            className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                            Tanggal Selesai
+                                                        </th>
+                                                        <th
+                                                            className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                            Tanggal Bayar
+                                                        </th>
+                                                        <th
+                                                            className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                            Status Pembayaran
+                                                        </th>
+                                                        <th
+                                                            className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                            Status Pengerjaan
+                                                        </th>
+                                                        <th
+                                                            className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                            Nama Petugas
+                                                        </th>
+                                                        <th
+                                                            className='px-5 py-3 border-b-2 border-gray-200 bg-sky-500 text-left text-xs font-semibold text-white uppercase tracking-wider'>
+                                                            Aksi
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {dataTransaction.map((val, index) => {
+                                                        return (
+                                                            <tr key={index}>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
                                                                         <p className='text-gray-900 whitespace-no-wrap'>
-                                                                            {getMemberById(val.memberId)}
+                                                                            {index + 1}
                                                                         </p>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                <div className='flex items-center'>
-                                                                    <p className='text-gray-900 whitespace-no-wrap'>
-                                                                        {formatDate(val.date)}
-                                                                    </p>
-                                                                </div>
-                                                            </td>
-                                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                <div className='flex items-center'>
-                                                                    <p className='text-gray-900 whitespace-no-wrap'>
-                                                                        {formatDate(val.deadline)}
-                                                                    </p>
-                                                                </div>
-                                                            </td>
-                                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                <div className='flex items-center'>
-                                                                    <p className='text-gray-900 whitespace-no-wrap'>
-                                                                        {formatDate(val.datePayment)}
-                                                                    </p>
-                                                                </div>
-                                                            </td>
-                                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                <div className='flex items-center'>
-                                                                    {val.statusPayment === 'unpaid' ? (
-                                                                        <p className='bg-red-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>
-                                                                            Belum Lunas
-                                                                        </p>
-                                                                    ) : (
-                                                                        <p className='bg-green-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>
-                                                                            Lunas
-                                                                        </p>
-                                                                    )}
-                                                                </div>
-                                                            </td>
-                                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                <div className='flex items-center'>
-                                                                    {val.status === 'pending' ? (
-                                                                        <p className='bg-yellow-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>
-                                                                            Proses
-                                                                        </p>
-                                                                    ) : val.status === 'done' ? (
-                                                                        <p className='bg-green-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>
-                                                                            Selesai
-                                                                        </p>
-                                                                    ) : val.status === 'canceled' ? (
-                                                                        <p className='bg-red-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>
-                                                                            Dibatalkan
-                                                                        </p>
-                                                                    ) : (
-                                                                        <p className='bg-blue-500 px-2 py-0.5 rounded-xl text-white font-bold whitespace-no-wrap'>
-                                                                            Mengantri
-                                                                        </p>
-                                                                    )}
-                                                                </div>
-                                                            </td>
-                                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                <div className='flex items-center'>
-                                                                    <div className='flex-shrink-0 w-10 h-10'>
-                                                                        <img className='w-full h-full rounded-full'
-                                                                            src='https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg'
-                                                                            alt='Member Profile Picture' />
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <div className='flex-shrink-0 w-10 h-10'>
+                                                                            <img className='w-full h-full rounded-full'
+                                                                                src='https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg'
+                                                                                alt='Member Profile Picture' />
+                                                                        </div>
+                                                                        <div className='ml-3'>
+                                                                            <p className='text-gray-900 whitespace-no-wrap'>
+                                                                                {formatMemberName(val.memberId)}
+                                                                            </p>
+                                                                        </div>
                                                                     </div>
-                                                                    <div className='ml-3'>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
                                                                         <p className='text-gray-900 whitespace-no-wrap'>
-                                                                            {getAdminById(val.adminId)}
+                                                                            {formatDate(val.date)}
                                                                         </p>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                                                                <Link to={`/owner/transaction/edit/${val._id}`} className='flex items-center justify-center bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'><FaInfoCircle className='mr-2' /> Detail</Link>
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                })}
-                                            </tbody>
-                                        </table>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <p className='text-gray-900 whitespace-no-wrap'>
+                                                                            {formatDate(val.deadline)}
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <p className='text-gray-900 whitespace-no-wrap'>
+                                                                            {formatDate(val.datePayment)}
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        {getStatusPayment(val.statusPayment)}
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        {getStatusTransaction(val.status)}
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <div className='flex items-center'>
+                                                                        <div className='flex-shrink-0 w-10 h-10'>
+                                                                            <img className='w-full h-full rounded-full'
+                                                                                src='https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg'
+                                                                                alt='Member Profile Picture' />
+                                                                        </div>
+                                                                        <div className='ml-3'>
+                                                                            <p className='text-gray-900 whitespace-no-wrap'>
+                                                                                {formatUserName(val.adminId)}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                                    <Link to={`/owner/transaction/detail/${val._id}`} className='flex items-center justify-center bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer'><FaInfoCircle className='mr-2' /> Detail</Link>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })}
+                                                </tbody>
+                                            </table>
+                                        )}
                                     </div>
                                 </div>
                             </div>
