@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaEdit, FaTrash } from 'react-icons/fa'
+import PDF from 'react-to-pdf'
 
 import axios from '../../../config/axios'
 import cookies from '../../../config/cookie'
@@ -102,7 +103,7 @@ export default function EditTransaction() {
         let day = newDate.getDate()
         let month = newDate.getMonth() + 1
         let year = newDate.getFullYear()
-        return `${day}/${month}/${year}`
+        return `${day}-${month}-${year}`
     }
 
     // Array StatusPayment For Select
@@ -162,6 +163,11 @@ export default function EditTransaction() {
             }
         }
     }
+
+    // React to PDF
+    const ref = createRef()
+
+    console.log(dataDetail)
 
     return (
         <>
@@ -299,6 +305,80 @@ export default function EditTransaction() {
                             </button>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <section className='md:ml-64 min-h-screen'>
+                <div className='container mx-auto px-4 py-10'>
+                    <div className='mx-auto text-center'>
+                        <h1 className='font-semibold font-sans text-4xl pt-4 pb-2'>Laporan Transaksi KuyLaundry</h1>
+                        <h2>
+                            <b>NPWP / PKP &nbsp;:&nbsp;</b> <span className='font-mono text-gray-600'>1.111111.11111</span>
+                        </h2>
+                        <h2>
+                            <b>Tanggal Pengukuhan &nbsp;:&nbsp;</b> <span className='font-mono text-gray-600'>10-05-2012</span>
+                        </h2>
+                        <h3 className='text-gray-600 pb-2'>Jl. Sulfat Raya No. 135, Kel. Pandanwangi, Kec. Blimbing, Kota Malang, Jawa Timur.</h3>
+                        {/* <hr className='border-2 border-gray-400' /> */}
+                    </div>
+                    <table className='w-full'>
+                        <thead>
+                            <tr className='border-2'>
+                                <th className='px-4 py-2'>
+                                    <p>No Nota &nbsp;:&nbsp;</p>
+                                </th>
+                                <th className='px-4 py-2'>
+                                    <p className='font-mono text-gray-600'>{data._id}</p>
+                                </th>
+                                <th className='px-4 py-2'>
+                                    <p>Tanggal &nbsp;:&nbsp;</p>
+                                </th>
+                                <th className='px-4 py-2'>
+                                    <p className='font-mono text-gray-600'>{formatDate(data.date)}</p>
+                                </th>
+                            </tr>
+                            <tr className='border-2'>
+                                <th className='px-4 py-2'>
+                                    <p>No</p>
+                                </th>
+                                <th className='px-4 py-2'>
+                                    <p>Daftar Paket</p>
+                                </th>
+                                <th className='px-4 py-2'>
+                                    <p>Harga</p>
+                                </th>
+                                <th className='px-4 py-2'>
+                                    <p>Qty</p>
+                                </th>
+                                <th className='px-4 py-2'>
+                                    <p>Subtotal</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* {dataDetail.map((item, index) => {
+                                return (
+                                    <tr key={index} className='border-2'>
+                                        <td className='px-4 py-2'>
+                                            <p>{index + 1}</p>
+                                        </td>
+                                        <td className='px-4 py-2'>
+                                            <p className='font-mono text-gray-600'>{formatPackageName(item.packageId)}</p>
+                                        </td>
+                                        <td className='px-4 py-2'>
+                                            <p className='font-mono text-gray-600'>{formatPrice(item.price)}</p>
+                                        </td>
+                                        <td className='px-4 py-2'>
+                                            <p className='font-mono text-gray-600'>{item.quantity}</p>
+                                        </td>
+                                        <td className='px-4 py-2'>
+                                            <p className='font-mono text-gray-600'>{formatPrice(item.price * item.quantity)}</p>
+                                        </td>
+                                    </tr>
+                                )
+                            })} */}
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </>
