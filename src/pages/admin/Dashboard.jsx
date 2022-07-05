@@ -24,45 +24,29 @@ export default function Dashboard() {
         // Outlet
         const getDataOutlet = async () => {
             await axios.get('/outlet', { headers: headerConfig })
-                .then(res => {
-                    setDataOutlet(res.data.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                .then(res => setDataOutlet(res.data.data))
+                .catch(err => console.log(err))
         }
 
         // Member
         const getDataMember = async () => {
             await axios.get('/member', { headers: headerConfig })
-                .then(res => {
-                    setDataMember(res.data.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                .then(res => setDataMember(res.data.data))
+                .catch(err => console.log(err))
         }
 
         // Transaction
         const getDataTransaction = async () => {
             await axios.get('/transaction', { headers: headerConfig })
-                .then(res => {
-                    setDataTransaction(res.data.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                .then(res => setDataTransaction(res.data.data))
+                .catch(err => console.log(err))
         }
 
         // User
         const getDataUser = async () => {
             await axios.get('/admin', { headers: headerConfig })
-                .then(res => {
-                    setDataUser(res.data.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                .then(res => setDataUser(res.data.data))
+                .catch(err => console.log(err))
         }
 
         Promise.all([
@@ -75,9 +59,7 @@ export default function Dashboard() {
 
     // Function Format Member Name from id
     const formatMemberName = (id) => {
-        if (!id) {
-            return ''
-        }
+        if (!id) return ''
 
         const member = dataMember.find(member => member._id === id)
         return member.name
@@ -85,9 +67,7 @@ export default function Dashboard() {
 
     // Function Format User Name from id
     const formatUserName = (id) => {
-        if (!id) {
-            return ''
-        }
+        if (!id) return ''
 
         const user = dataUser.find(user => user._id === id)
         return user.name

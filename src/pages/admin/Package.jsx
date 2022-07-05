@@ -22,12 +22,8 @@ export default function Package() {
     useEffect(() => {
         const getData = async () => {
             await axios.get('/package', { headers: headerConfig })
-                .then(res => {
-                    setData(res.data.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                .then(res => setData(res.data.data))
+                .catch(err => console.log(err))
         }
 
         getData()

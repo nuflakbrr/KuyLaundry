@@ -10,6 +10,9 @@ export default function EditTransaction() {
     // Required State
     const [data, setData] = useState([])
     const [dataDetail, setDataDetail] = useState([])
+    const [dataPackage, setDataPackage] = useState([])
+    const [dataMember, setDataMember] = useState([])
+    const [dataUser, setDataUser] = useState([])
 
     const [isUpdateTransactionError, setIsUpdateTransactionError] = useState()
     const [isUpdateTransactionSuccess, setIsUpdateTransactionSuccess] = useState()
@@ -28,29 +31,70 @@ export default function EditTransaction() {
         // Transaction
         const getDataTransaction = async () => {
             await axios.get(`/transaction/${id}`, { headers: headerConfig })
-                .then(res => {
-                    setData(res.data.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                .then(res => setData(res.data.data))
+                .catch(err => console.log(err))
         }
 
         // Transaction Detail
         const getDataTransactionDetail = async () => {
             await axios.get(`/transaction-detail/${id}`, { headers: headerConfig })
-                .then(res => {
-                    setDataDetail(res.data.data[0])
-                    console.log(res.data.data[0])
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                .then(res => setDataDetail(res.data.data[0]))
+                .catch(err => console.log(err))
         }
 
-        getDataTransaction()
-        getDataTransactionDetail()
+        // Package
+        const getDataPackage = async () => {
+            await axios.get(`/package`, { headers: headerConfig })
+                .then(res => setDataPackage(res.data.data))
+                .catch(err => console.log(err))
+        }
+
+        // Member
+        const getDataMember = async () => {
+            await axios.get('/member', { headers: headerConfig })
+                .then(res => setDataMember(res.data.data))
+                .catch(err => console.log(err))
+        }
+
+        // User
+        const getDataUser = async () => {
+            await axios.get('/admin', { headers: headerConfig })
+                .then(res => setDataUser(res.data.data))
+                .catch(err => console.log(err))
+        }
+
+        Promise.all([
+            getDataTransaction(),
+            getDataTransactionDetail(),
+            getDataPackage(),
+            getDataMember(),
+            getDataUser()
+        ])
     }, [])
+
+    // Function Format Member Name from id
+    const formatMemberName = (id) => {
+        if (!id) return ''
+
+        const member = dataMember.find(member => member._id === id)
+        return member.name
+    }
+
+    // Function Format User Name from id
+    const formatUserName = (id) => {
+        if (!id) return ''
+
+        const user = dataUser.find(user => user._id === id)
+        return user.name
+    }
+
+    // Function Format Package Name from id
+    const formatPackageName = (id) => {
+        if (!id) return ''
+
+        const paket = dataPackage.find(paket => paket._id === id)
+        return paket.name
+    }
 
     // Function Format Date from API
     const formatDate = (date) => {
@@ -63,12 +107,12 @@ export default function EditTransaction() {
 
     // Array StatusPayment For Select
     const statusPayment = [
-        { statusPayment: 'unpaid', title: 'unpaid' }, { statusPayment: 'paid', title: 'paid' }
+        { statusPayment: 'unpaid', title: 'Belum Lunas' }, { statusPayment: 'paid', title: 'Lunas' }
     ]
 
     // Array Status For Select
     const status = [
-        { status: 'pending', title: 'pending' }, { status: 'done', title: 'done' }, { status: 'canceled', title: 'canceled' }
+        { status: 'pending', title: 'Proses' }, { status: 'done', title: 'Selesai' }, { status: 'canceled', title: 'Dibatalkan' }
     ]
 
     // Define Validate form
@@ -147,9 +191,9 @@ export default function EditTransaction() {
                             </div>
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='memberId'>
-                                    Id Member
+                                    Nama Member
                                 </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='memberId' type='text' value={data.memberId} placeholder='memberId' disabled />
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='memberId' type='text' value={formatMemberName(data.memberId)} placeholder='memberId' disabled />
                             </div>
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='date'>
@@ -229,7 +273,7 @@ export default function EditTransaction() {
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='packageId'>
                                     Paket Jasa
                                 </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='packageId' type='text' value={dataDetail.packageId} placeholder='Paket Jasa' disabled />
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='packageId' type='text' value={formatPackageName(dataDetail.packageId)} placeholder='Paket Jasa' disabled />
                             </div>
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='quantity'>
@@ -239,9 +283,9 @@ export default function EditTransaction() {
                             </div>
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='gender'>
-                                    Id Petugas
+                                    Nama Petugas
                                 </label>
-                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='gender' type='text' value={data.adminId} placeholder='Id Petugas' disabled />
+                                <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-300 leading-tight focus:outline-none focus:shadow-outline' id='gender' type='text' value={formatUserName(data.adminId)} placeholder='Id Petugas' disabled />
                             </div>
                             <div className='mt-4'>
                                 <button className='flex items-center justify-center bg-sky-500 hover:bg-sky-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' type='submit'>

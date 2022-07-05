@@ -31,39 +31,29 @@ export default function Transaction() {
         // Member
         const getDataMember = async () => {
             await axios.get('/member', { headers: headerConfig })
-                .then(res => {
-                    setDataMember(res.data.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                .then(res => setDataMember(res.data.data))
+                .catch(err => console.log(err))
         }
 
         // Package
         const getDataPackage = async () => {
             axios.get('/package', { headers: headerConfig })
-                .then(res => {
-                    setDataPackage(res.data.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                .then(res => setDataPackage(res.data.data))
+                .catch(err => console.log(err))
         }
 
         // Admin
         const getDataAdmin = async () => {
             axios.get('/admin', { headers: headerConfig })
-                .then(res => {
-                    setDataAdmin(res.data.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                .then(res => setDataAdmin(res.data.data))
+                .catch(err => console.log(err))
         }
 
-        getDataMember()
-        getDataPackage()
-        getDataAdmin()
+        Promise.all([
+            getDataMember(),
+            getDataPackage(),
+            getDataAdmin(),
+        ])
     }, [])
 
     // POST Data From New Transaction Form

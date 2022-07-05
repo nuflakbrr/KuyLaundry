@@ -22,12 +22,8 @@ export default function Member() {
     useEffect(() => {
         const getData = async () => {
             await axios.get('/member', { headers: headerConfig })
-                .then(res => {
-                    setData(res.data.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                .then(res => setData(res.data.data))
+                .catch(err => console.log(err))
         }
 
         getData()

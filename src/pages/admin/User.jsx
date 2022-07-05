@@ -22,12 +22,8 @@ export default function User() {
     useEffect(() => {
         const getData = async () => {
             await axios.get('/admin', { headers: headerConfig })
-                .then(res => {
-                    setData(res.data.data)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                .then(res => setData(res.data.data))
+                .catch(err => console.log(err))
         }
 
         getData()
