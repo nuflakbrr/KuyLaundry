@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createRef } from 'react'
 import { useForm } from 'react-hook-form'
-import { FaEdit, FaTrash } from 'react-icons/fa'
-import PDF from 'react-to-pdf'
+import { FaEdit, FaFileDownload, FaTrash } from 'react-icons/fa'
+import Pdf from 'react-to-pdf'
 
 import axios from '../../../config/axios'
 import cookies from '../../../config/cookie'
@@ -39,7 +39,7 @@ export default function EditTransaction() {
         // Transaction Detail
         const getDataTransactionDetail = async () => {
             await axios.get(`/transaction-detail/${id}`, { headers: headerConfig })
-                .then(res => setDataDetail(res.data.data[0]))
+                .then(res => setDataDetail(res.data.data))
                 .catch(err => console.log(err))
         }
 
@@ -95,6 +95,14 @@ export default function EditTransaction() {
 
         const paket = dataPackage.find(paket => paket._id === id)
         return paket.name
+    }
+
+    // Function Get Price from Package Id
+    const getPrice = (id) => {
+        if (!id) return ''
+
+        const paket = dataPackage.find(paket => paket._id === id)
+        return paket.price
     }
 
     // Function Format Date from API
@@ -299,6 +307,11 @@ export default function EditTransaction() {
                                 </button>
                             </div>
                         </form>
+                        <div className="mt-4">
+                            <Pdf targetRef={ref} filename="laporan.pdf">
+                                {({ toPdf }) => <button className='flex items-center justify-center bg-green-500 hover:bg-green-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={toPdf}><FaFileDownload className='mr-2' /> Unduh Laporan</button>}
+                            </Pdf>
+                        </div>
                         <div className='mt-4'>
                             <button className='flex items-center justify-center bg-red-500 hover:bg-red-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={dropTransaction}>
                                 <FaTrash className='mr-2' /> Hapus Data
@@ -308,30 +321,30 @@ export default function EditTransaction() {
                 </div>
             </section>
 
-            <section className='md:ml-64 min-h-screen'>
+            <section className='md:ml-64 min-h-screen' ref={ref}>
                 <div className='container mx-auto px-4 py-10'>
                     <div className='mx-auto text-center'>
                         <h1 className='font-semibold font-sans text-4xl pt-4 pb-2'>Laporan Transaksi KuyLaundry</h1>
                         <h2>
-                            <b>NPWP / PKP &nbsp;:&nbsp;</b> <span className='font-mono text-gray-600'>1.111111.11111</span>
+                            <b>NPWP / PKP&nbsp;:&nbsp;</b> <span className='font-mono text-gray-600'>1.111111.11111</span>
                         </h2>
                         <h2>
-                            <b>Tanggal Pengukuhan &nbsp;:&nbsp;</b> <span className='font-mono text-gray-600'>10-05-2012</span>
+                            <b>Tanggal Pengukuhan&nbsp;:&nbsp;</b> <span className='font-mono text-gray-600'>10-05-2012</span>
                         </h2>
                         <h3 className='text-gray-600 pb-2'>Jl. Sulfat Raya No. 135, Kel. Pandanwangi, Kec. Blimbing, Kota Malang, Jawa Timur.</h3>
-                        {/* <hr className='border-2 border-gray-400' /> */}
+                        <hr className='border-2 border-gray-400 mt-2 mb-4' />
                     </div>
-                    <table className='w-full'>
+                    <table className='w-full overflow-x-auto'>
                         <thead>
                             <tr className='border-2'>
                                 <th className='px-4 py-2'>
-                                    <p>No Nota &nbsp;:&nbsp;</p>
+                                    <p>No Nota&nbsp;:&nbsp;</p>
                                 </th>
                                 <th className='px-4 py-2'>
                                     <p className='font-mono text-gray-600'>{data._id}</p>
                                 </th>
                                 <th className='px-4 py-2'>
-                                    <p>Tanggal &nbsp;:&nbsp;</p>
+                                    <p>Tanggal&nbsp;:&nbsp;</p>
                                 </th>
                                 <th className='px-4 py-2'>
                                     <p className='font-mono text-gray-600'>{formatDate(data.date)}</p>
@@ -355,29 +368,57 @@ export default function EditTransaction() {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {/* {dataDetail.map((item, index) => {
-                                return (
-                                    <tr key={index} className='border-2'>
+                        {dataDetail.map((val, index) => {
+                            return (
+                                <tbody key={index}>
+                                    <tr className='border-2'>
                                         <td className='px-4 py-2'>
-                                            <p>{index + 1}</p>
+                                            <p className='font-mono text-gray-600 text-center'>{index + 1}</p>
                                         </td>
                                         <td className='px-4 py-2'>
-                                            <p className='font-mono text-gray-600'>{formatPackageName(item.packageId)}</p>
+                                            <p className='font-mono text-gray-600 text-center'>{formatPackageName(val.packageId)}</p>
                                         </td>
                                         <td className='px-4 py-2'>
-                                            <p className='font-mono text-gray-600'>{formatPrice(item.price)}</p>
+                                            <p className='font-mono text-gray-600 text-center'>{getPrice(val.packageId)}</p>
                                         </td>
                                         <td className='px-4 py-2'>
-                                            <p className='font-mono text-gray-600'>{item.quantity}</p>
+                                            <p className='font-mono text-gray-600 text-center'>{val.quantity}</p>
                                         </td>
                                         <td className='px-4 py-2'>
-                                            <p className='font-mono text-gray-600'>{formatPrice(item.price * item.quantity)}</p>
+                                            <p className='font-mono text-gray-600 text-center'>{getPrice(val.packageId) * val.quantity}</p>
                                         </td>
                                     </tr>
-                                )
-                            })} */}
-                        </tbody>
+                                    <tr className='border-2'>
+                                        <td className='px-4 py-2'>
+                                            <p className='text-white cursor-default'>a</p>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr className='border-2'>
+                                        <td className='px-4 py-2' />
+                                        <td className='px-4 py-2' />
+                                        <td className='px-4 py-2'>
+                                            <p className='font-bold text-center'>Total (Rp)&nbsp;:&nbsp;</p>
+                                        </td>
+                                        <td className='px-4 py-2' />
+                                        <td className='px-4 py-2'>
+                                            <p className='font-mono text-gray-600 text-center'>{getPrice(val.packageId) * val.quantity}</p>
+                                        </td>
+                                    </tr>
+                                    <tr className='border-2'>
+                                        <td className='px-4 py-2'>
+                                            <p className='font-bold text-center'>
+                                                Kasir&nbsp;:&nbsp;
+                                                <span className='font-mono text-gray-600'>{formatUserName(data.adminId)}</span>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            )
+                        })}
                     </table>
                 </div>
             </section>
