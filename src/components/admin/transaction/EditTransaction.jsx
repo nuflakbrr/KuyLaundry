@@ -296,7 +296,7 @@ export default function EditTransaction() {
                             </div>
                         </form>
                         <div className="mt-4">
-                            <Pdf targetRef={ref} filename="laporan.pdf">
+                            <Pdf targetRef={ref} filename={`Laporan-Transaksi-${formatDate(data.date)}.pdf`}>
                                 {({ toPdf }) => <button className='flex items-center justify-center bg-green-500 hover:bg-green-600 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' onClick={toPdf}><FaFileDownload className='mr-2' /> Unduh Laporan</button>}
                             </Pdf>
                         </div>
