@@ -380,10 +380,10 @@ export default function EditTransaction() {
                                         <td className='px-4 py-2'>
                                             <p className='text-white cursor-default'>a</p>
                                         </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td className='px-4 py-2' />
+                                        <td className='px-4 py-2' />
+                                        <td className='px-4 py-2' />
+                                        <td className='px-4 py-2' />
                                     </tr>
                                     <tr className='border-2'>
                                         <td className='px-4 py-2' />
