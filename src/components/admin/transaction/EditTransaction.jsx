@@ -175,8 +175,6 @@ export default function EditTransaction() {
     // React to PDF
     const ref = createRef()
 
-    console.log(dataDetail)
-
     return (
         <>
             <SidebarAdmin />
@@ -309,7 +307,7 @@ export default function EditTransaction() {
                 </div>
             </section>
 
-            <section className='md:ml-64 min-h-screen max-w-[790px] mx-auto' ref={ref}>
+            <section className='absolute top-1 -z-10 md:ml-64 min-h-screen max-w-[790px] mx-auto' ref={ref}>
                 <div className='container mx-auto px-4 py-10'>
                     <div className='mx-auto text-center'>
                         <h1 className='font-semibold font-sans text-4xl pt-4 pb-2'>Laporan Transaksi KuyLaundry</h1>
