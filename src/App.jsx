@@ -21,6 +21,7 @@ import { EditAdmin, Register } from './components/admin/user'
 
 // Transaction
 import { EditTransaction } from './components/admin/transaction'
+import { EditTransaction as EditTransactionCashier } from './components/cashier/transaction'
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
       <Route path='/cashier/member/edit/*' element={<EditMemberCashier />} />
 
       <Route path='/cashier/transaction/add' element={<TransactionCashier />} />
+      <Route path='/cashier/transaction/edit/*' element={<EditTransactionCashier />} />
 
       {/* Owner Side Route */}
       <Route path='/owner/dashboard' element={<DashboardOwner />} />

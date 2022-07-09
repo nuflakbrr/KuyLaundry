@@ -82,18 +82,12 @@ export default function Transaction() {
                         axios.post('/transaction-detail', bodyDetailTransaction, { headers: headerConfig })
                             .then(res => {
                                 setIsRegisterSuccess(true)
-                                setTimeout(() => {
-                                    window.location.href = '/admin/dashboard'
-                                }, 1500)
+                                setTimeout(() => window.location.href = '/admin/dashboard', 1500)
                             })
-                            .catch(err => {
-                                console.log(err)
-                            })
+                            .catch(err => console.log(err))
                     }
                 })
-                .catch(err => {
-                    console.log(err)
-                })
+                .catch(err => console.log(err))
         } catch (error) {
             setIsRegisterError(true)
         }
