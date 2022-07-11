@@ -25,12 +25,8 @@ export default function EditOutlet() {
     // GET Data Outlet from Params
     useEffect(() => {
         axios.get(`/outlet/${id}`, { headers: headerConfig })
-            .then(res => {
-                setData(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+            .then(res => setData(res.data.data))
+            .catch(err => console.log(err))
     }, [])
 
     // Define Validate form
@@ -47,13 +43,11 @@ export default function EditOutlet() {
         try {
             const response = await axios.put(`/outlet/${id}`, body, { headers: headerConfig })
 
-            if (response.data.message === 'Outlet not found') {
-                throw new Error(response.data.message)
-            } else if (response.data.message === 'Outlet updated successfully') {
+            if (response.data.message === 'Outlet not found') throw new Error(response.data.message)
+
+            if (response.data.message === 'Outlet updated successfully') {
                 setIsUpdateOutletSuccess(true)
-                setTimeout(() => {
-                    window.location.href = '/admin/outlet'
-                }, 1500)
+                setTimeout(() => window.location.href = '/admin/outlet', 1500)
             }
         } catch (error) {
             setIsUpdateOutletError(true)
@@ -68,9 +62,7 @@ export default function EditOutlet() {
                     alert(res.data.message)
                     window.location.href = '/admin/outlet'
                 })
-                .catch(err => {
-                    console.log(err)
-                })
+                .catch(err => console.log(err))
         }
     }
 

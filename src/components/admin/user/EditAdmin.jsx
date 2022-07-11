@@ -25,18 +25,12 @@ export default function EditAdmin() {
     // GET Data Admin from Params
     useEffect(() => {
         axios.get(`/admin/${id}`, { headers: headerConfig })
-            .then(res => {
-                setData(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+            .then(res => setData(res.data.data))
+            .catch(err => console.log(err))
     }, [])
 
     // Array Role For Select
-    const role = [
-        { role: 'admin', title: 'Admin' }, { role: 'cashier', title: 'Kasir' }, { role: 'owner', title: 'Pemilik' }
-    ]
+    const role = [{ role: 'admin', title: 'Admin' }, { role: 'cashier', title: 'Kasir' }, { role: 'owner', title: 'Pemilik' }]
 
     // Define Validate form
     const { handleSubmit, register } = useForm()
@@ -53,13 +47,11 @@ export default function EditAdmin() {
         try {
             const response = await axios.put(`/admin/${id}`, body, { headers: headerConfig })
 
-            if (response.data.message === 'Admin not found') {
-                throw new Error(response.data.message)
-            } else if (response.data.message === 'Admin updated successfully') {
+            if (response.data.message === 'Admin not found') throw new Error(response.data.message)
+
+            if (response.data.message === 'Admin updated successfully') {
                 setIsUpdateAdminSuccess(true)
-                setTimeout(() => {
-                    window.location.href = '/admin/user'
-                }, 1500)
+                setTimeout(() => window.location.href = '/admin/user', 1500)
             }
         } catch (error) {
             setIsUpdateAdminError(true)
@@ -74,9 +66,7 @@ export default function EditAdmin() {
                     alert(res.data.message)
                     window.location.href = '/admin/user'
                 })
-                .catch(err => {
-                    console.log(err)
-                })
+                .catch(err => console.log(err))
         }
     }
 

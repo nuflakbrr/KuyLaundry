@@ -25,24 +25,16 @@ export default function Login() {
 
                 if (response.data.user.role === 'admin') {
                     setIsLoginSuccess(true)
-                    setTimeout(() => {
-                        window.location.href = '/admin/dashboard'
-                    }, 1500)
+                    setTimeout(() => window.location.href = '/admin/dashboard', 1500)
                 } else if (response.data.user.role === 'cashier') {
                     setIsLoginSuccess(true)
-                    setTimeout(() => {
-                        window.location.href = '/cashier/dashboard'
-                    }, 1500)
+                    setTimeout(() => window.location.href = '/cashier/dashboard', 1500)
                 } else if (response.data.user.role === 'owner') {
                     setIsLoginSuccess(true)
-                    setTimeout(() => {
-                        window.location.href = '/owner/dashboard'
-                    }, 1500)
+                    setTimeout(() => window.location.href = '/owner/dashboard', 1500)
                 }
             }
-        } catch (error) {
-            setIsLoginError(true)
-        }
+        } catch (error) { setIsLoginError(true) }
     }
 
     const { handleSubmit, register } = useForm()

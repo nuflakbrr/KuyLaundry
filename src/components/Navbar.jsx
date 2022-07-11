@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
-// import Me from '../assets/images/Me.png'
-
 export default function Navbar() {
     const [showMenu, setShowMenu] = useState(false)
 
@@ -10,13 +8,9 @@ export default function Navbar() {
     const inactiveClass = 'text-gray-300 hover:text-white hover:bg-gray-800 transition duration-300 ease-in-out'
     const inactiveClassMenu = 'text-gray-700 hover:bg-gray-100 hover:bg-gray-800 transition duration-300 ease-in-out'
 
-    const activeClasses = (path) => {
-        return window.location.pathname === path ? activeClass : inactiveClass
-    }
+    const activeClasses = (path) => window.location.pathname === path ? activeClass : inactiveClass
 
-    const activeClassMob = (path) => {
-        return window.location.pathname === path ? activeClass : inactiveClassMenu
-    }
+    const activeClassMob = (path) => window.location.pathname === path ? activeClass : inactiveClassMenu
 
     const links = [
         { path: '/', name: 'Beranda' },
@@ -34,11 +28,6 @@ export default function Navbar() {
                             <div className='ml-3 relative'>
                                 <div>
                                     <span className='sr-only'>Open user menu</span>
-                                    {/* <img
-                                        className='h-10 w-10 rounded-full border-2'
-                                        src={Me}
-                                        alt='Naufal Akbar Nugroho'
-                                    /> */}
                                     <h1 className='text-white font-bold text-xl'><span className='text-sky-500'>Kuy</span>Laundry</h1>
                                 </div>
                             </div>

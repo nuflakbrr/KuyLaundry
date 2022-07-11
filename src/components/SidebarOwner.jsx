@@ -19,9 +19,7 @@ export default function SidebarOwner() {
     const activeClass = 'text-white hover:text-white text-xs uppercase py-3 font-bold flex'
     const inActiveClass = 'text-gray-500 hover:text-gray-400 text-xs uppercase py-3 font-bold flex'
 
-    const activeClassses = (path) => {
-        return window.location.pathname === path ? activeClass : inActiveClass
-    }
+    const activeClassses = (path) => window.location.pathname === path ? activeClass : inActiveClass
 
     // Access Navigation for Owner
     const primaryLinks = [

@@ -32,9 +32,7 @@ export default function Package() {
     // Search Event
     function searchItems(searched) {
         setSearch(searched)
-        setFilteredResults(data.filter(item => {
-            return item.name.toLowerCase().includes(searched.toLowerCase())
-        }))
+        setFilteredResults(data.filter(item => item.name.toLowerCase().includes(searched.toLowerCase())))
     }
 
     return (

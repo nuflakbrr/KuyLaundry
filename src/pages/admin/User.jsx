@@ -32,9 +32,7 @@ export default function User() {
     // Search Event
     function searchItems(searched) {
         setSearch(searched)
-        setFilteredResults(data.filter(item => {
-            return item.name.toLowerCase().includes(searched.toLowerCase()) || item.email.toLowerCase().includes(searched.toLowerCase()) || item.role.toLowerCase().includes(searched.toLowerCase())
-        }))
+        setFilteredResults(data.filter(item => item.name.toLowerCase().includes(searched.toLowerCase()) || item.email.toLowerCase().includes(searched.toLowerCase()) || item.role.toLowerCase().includes(searched.toLowerCase())))
     }
 
     return (

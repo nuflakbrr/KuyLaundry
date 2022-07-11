@@ -40,9 +40,7 @@ export default function Member() {
     // Search Event
     function searchItems(searched) {
         setSearch(searched)
-        setFilteredResults(data.filter(item => {
-            return item.name.toLowerCase().includes(searched.toLowerCase()) || item.address.toLowerCase().includes(searched.toLowerCase()) || item.phone.toLowerCase().includes(searched.toLowerCase())
-        }))
+        setFilteredResults(data.filter(item => item.name.toLowerCase().includes(searched.toLowerCase()) || item.address.toLowerCase().includes(searched.toLowerCase()) || item.phone.toLowerCase().includes(searched.toLowerCase())))
     }
 
     return (

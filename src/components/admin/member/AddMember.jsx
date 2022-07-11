@@ -31,9 +31,9 @@ export default function AddMember() {
         try {
             const response = await axios.post('/member/', body, { headers: headerConfig })
 
-            if (response.data.message === 'Member already exist') {
-                throw new Error(response.data.message)
-            } else if (response.data.message === 'Member created successfully') {
+            if (response.data.message === 'Member already exist') throw new Error(response.data.message)
+
+            if (response.data.message === 'Member created successfully') {
                 setIsRegisterSuccess(true)
                 setTimeout(() => {
                     window.location.href = '/admin/member'

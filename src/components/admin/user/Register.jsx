@@ -25,13 +25,11 @@ export default function Register() {
         try {
             const response = await axios.post('/admin/', body)
 
-            if (response.data.message === 'Admin already exist') {
-                throw new Error(response.data.message)
-            } else if (response.data.message === 'Admin created successfully') {
+            if (response.data.message === 'Admin already exist') throw new Error(response.data.message)
+
+            if (response.data.message === 'Admin created successfully') {
                 setIsRegisterSuccess(true)
-                setTimeout(() => {
-                    window.location.href = '/admin/user'
-                }, 1500)
+                setTimeout(() => window.location.href = '/admin/user', 1500)
             }
         } catch (error) {
             setIsRegisterError(true)

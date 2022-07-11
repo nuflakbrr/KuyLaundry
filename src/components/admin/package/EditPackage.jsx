@@ -25,12 +25,8 @@ export default function EditPackage() {
     // GET Data Package from Params
     useEffect(() => {
         axios.get(`/package/${id}`, { headers: headerConfig })
-            .then(res => {
-                setData(res.data.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+            .then(res => setData(res.data.data))
+            .catch(err => console.log(err))
     }, [])
 
     // Define Validate form
@@ -46,13 +42,11 @@ export default function EditPackage() {
         try {
             const response = await axios.put(`/package/${id}`, body, { headers: headerConfig })
 
-            if (response.data.message === 'Package not found') {
-                throw new Error(response.data.message)
-            } else if (response.data.message === 'Package updated successfully') {
+            if (response.data.message === 'Package not found') throw new Error(response.data.message)
+
+            if (response.data.message === 'Package updated successfully') {
                 setIsUpdatePackageSuccess(true)
-                setTimeout(() => {
-                    window.location.href = '/admin/package'
-                }, 1500)
+                setTimeout(() => window.location.href = '/admin/package', 1500)
             }
         } catch (error) {
             setIsUpdatePackageError(true)
@@ -67,9 +61,7 @@ export default function EditPackage() {
                     alert(res.data.message)
                     window.location.href = '/admin/package'
                 })
-                .catch(err => {
-                    console.log(err)
-                })
+                .catch(err => console.log(err))
         }
     }
 

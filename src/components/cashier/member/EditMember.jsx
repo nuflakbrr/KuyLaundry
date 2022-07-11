@@ -46,9 +46,9 @@ export default function EditMember() {
         try {
             const response = await axios.put(`/member/${id}`, body, { headers: headerConfig })
 
-            if (response.data.message === 'Member not found') {
-                throw new Error(response.data.message)
-            } else if (response.data.message === 'Member updated successfully') {
+            if (response.data.message === 'Member not found') throw new Error(response.data.message)
+
+            if (response.data.message === 'Member updated successfully') {
                 setIsUpdateMemberSuccess(true)
                 setTimeout(() => {
                     window.location.href = '/cashier/member'

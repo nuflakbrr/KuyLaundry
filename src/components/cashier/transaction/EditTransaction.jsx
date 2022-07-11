@@ -115,14 +115,10 @@ export default function EditTransaction() {
     }
 
     // Array StatusPayment For Select
-    const statusPayment = [
-        { statusPayment: 'unpaid', title: 'Belum Lunas' }, { statusPayment: 'paid', title: 'Lunas' }
-    ]
+    const statusPayment = [{ statusPayment: 'unpaid', title: 'Belum Lunas' }, { statusPayment: 'paid', title: 'Lunas' }]
 
     // Array Status For Select
-    const status = [
-        { status: 'pending', title: 'Proses' }, { status: 'done', title: 'Selesai' }, { status: 'canceled', title: 'Dibatalkan' }
-    ]
+    const status = [{ status: 'pending', title: 'Proses' }, { status: 'done', title: 'Selesai' }, { status: 'canceled', title: 'Dibatalkan' }]
 
     // Define Validate form
     const { handleSubmit, register } = useForm()
@@ -138,9 +134,9 @@ export default function EditTransaction() {
         try {
             const response = await axios.put(`/transaction/${id}`, body, { headers: headerConfig })
 
-            if (response.data.message === 'Transaction not found') {
-                throw new Error(response.data.message)
-            } else if (response.data.message === 'Transaction updated successfully') {
+            if (response.data.message === 'Transaction not found') throw new Error(response.data.message)
+
+            if (response.data.message === 'Transaction updated successfully') {
                 setIsUpdateTransactionSuccess(true)
                 setTimeout(() => {
                     window.location.href = '/cashier/dashboard'
@@ -157,9 +153,9 @@ export default function EditTransaction() {
             try {
                 const res = await axios.delete(`/transaction/${id}`, { headers: headerConfig })
 
-                if (res.data.message === 'Transaction not found') {
-                    throw new Error(res.data.message)
-                } else if (res.data.message === 'Transaction deleted successfully') {
+                if (res.data.message === 'Transaction not found') throw new Error(res.data.message)
+
+                if (res.data.message === 'Transaction deleted successfully') {
                     alert(res.data.message)
                     setIsUpdateTransactionSuccess(true)
                     setTimeout(() => {

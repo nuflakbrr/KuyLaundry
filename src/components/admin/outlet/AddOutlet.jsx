@@ -30,13 +30,11 @@ export default function AddOutlet() {
         try {
             const response = await axios.post('/outlet/', body, { headers: headerConfig })
 
-            if (response.data.message === 'Outlet already exist') {
-                throw new Error(response.data.message)
-            } else if (response.data.message === 'Outlet created successfully') {
+            if (response.data.message === 'Outlet already exist') throw new Error(response.data.message)
+
+            if (response.data.message === 'Outlet created successfully') {
                 setIsRegisterSuccess(true)
-                setTimeout(() => {
-                    window.location.href = '/admin/outlet'
-                }, 1500)
+                setTimeout(() => window.location.href = '/admin/outlet', 1500)
             }
         } catch (error) {
             setIsRegisterError(true)

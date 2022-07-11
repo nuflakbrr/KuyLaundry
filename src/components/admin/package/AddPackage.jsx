@@ -29,13 +29,11 @@ export default function AddPackage() {
         try {
             const response = await axios.post('/package/', body, { headers: headerConfig })
 
-            if (response.data.message === 'Package already exist') {
-                throw new Error(response.data.message)
-            } else if (response.data.message === 'Package created successfully') {
+            if (response.data.message === 'Package already exist') throw new Error(response.data.message)
+
+            if (response.data.message === 'Package created successfully') {
                 setIsRegisterSuccess(true)
-                setTimeout(() => {
-                    window.location.href = '/admin/package'
-                }, 1500)
+                setTimeout(() => window.location.href = '/admin/package', 1500)
             }
         } catch (error) {
             setIsRegisterError(true)

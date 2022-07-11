@@ -82,17 +82,13 @@ export default function Transaction() {
                         axios.post('/transaction-detail', bodyDetailTransaction, { headers: headerConfig })
                             .then(res => {
                                 setIsRegisterSuccess(true)
-                                setTimeout(() => {
-                                    window.location.href = '/cashier/dashboard'
-                                }, 1500)
+                                setTimeout(() => window.location.href = '/cashier/dashboard', 1500)
                             })
                             .catch(err => console.log(err))
                     }
                 })
                 .catch(err => console.log(err))
-        } catch (error) {
-            setIsRegisterError(true)
-        }
+        } catch (error) { setIsRegisterError(true) }
     }
 
     return (
@@ -175,38 +171,36 @@ export default function Transaction() {
                                     <option value='canceled'>Dibatalkan</option>
                                 </select>
                             </div>
-                            {
-                                totalPackage > 0 && (
-                                    Array.from({ length: totalPackage }, (item, index) => {
-                                        return (
-                                            <div key={item}>
-                                                <div className='mt-4'>
-                                                    <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='packageId'>
-                                                        Paket Jasa #{index + 1}
-                                                    </label>
-                                                    <select className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='packageId' name='packageId' {...register('packageId', { required: true })}>
-                                                        <option defaultValue disabled>Pilih Nama Paket Jasa</option>
-                                                        {dataPackage.map((item, index) => {
-                                                            return (
-                                                                <option key={index} value={item._id}>{item.name}</option>
-                                                            )
-                                                        })}
-                                                    </select>
-                                                </div>
-                                                <div className='mt-4'>
-                                                    <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='quantity'>
-                                                        Kuantitas
-                                                    </label>
-                                                    <div className='flex items-center justify-center'>
-                                                        <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline' id='quantity' name='quantity' type='number' placeholder='Kuantitas' {...register('quantity', { required: true })} />
-                                                        <span className='mx-2 text-lg'>Kg</span>
-                                                    </div>
+                            {totalPackage > 0 && (
+                                Array.from({ length: totalPackage }, (item, index) => {
+                                    return (
+                                        <div key={item}>
+                                            <div className='mt-4'>
+                                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='packageId'>
+                                                    Paket Jasa #{index + 1}
+                                                </label>
+                                                <select className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='packageId' name='packageId' {...register('packageId', { required: true })}>
+                                                    <option defaultValue disabled>Pilih Nama Paket Jasa</option>
+                                                    {dataPackage.map((item, index) => {
+                                                        return (
+                                                            <option key={index} value={item._id}>{item.name}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </div>
+                                            <div className='mt-4'>
+                                                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='quantity'>
+                                                    Kuantitas
+                                                </label>
+                                                <div className='flex items-center justify-center'>
+                                                    <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline' id='quantity' name='quantity' type='number' placeholder='Kuantitas' {...register('quantity', { required: true })} />
+                                                    <span className='mx-2 text-lg'>Kg</span>
                                                 </div>
                                             </div>
-                                        )
-                                    })
-                                )
-                            }
+                                        </div>
+                                    )
+                                })
+                            )}
                             <div className='mt-4'>
                                 <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='adminId'>
                                     Petugas
